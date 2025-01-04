@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                 // Target modern JavaScript
+      "module": "CommonJS",              // Node.js uses CommonJS modules
+      "outDir": "dist",                  // Output directory for compiled files
+      "rootDir": "src",                  // Root directory for source files
+      "strict": true,                    // Enable strict type checking
+      "esModuleInterop": true,           // Allow default imports from CommonJS modules
+      "forceConsistentCasingInFileNames": true, // Ensure consistent casing in imports
+      "moduleResolution": "node",        // Use Node.js module resolution
+      "types": ["node"]                  // Include Node.js type definitions
+    },
+    "include": ["src/**/*.ts"],          // Include all TypeScript files in src/
+    "exclude": ["node_modules", "dist"] // Exclude unnecessary files
+  }
+  

@@ -1,0 +1,19 @@
+{
+  "name": "lambdas",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "bundle": "esbuild src/ingestion/lambda_function.ts --bundle --platform=node --target=node18 --outfile=dist/index.js",
+    "package": "npm run bundle && zip -j dist/ingestion.zip dist/index.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1358.0",
+    "axios": "^1.7.9"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "esbuild": "^0.19.2",
+    "typescript": "^5.2.2"
+  }
+}

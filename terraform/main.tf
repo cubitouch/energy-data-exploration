@@ -55,12 +55,14 @@ resource "aws_iam_role_policy_attachment" "lambda_role_attach" {
 }
 
 resource "aws_lambda_function" "ingestion" {
-  filename         = "${path.module}/dummy-lambda.zip"
+  filename         = "${path.module}/../lambdas/node/dist/ingestion.zip"
   function_name    = "energy-market-france-ingestion"
   role             = aws_iam_role.lambda_role.arn
-  handler          = "lambda_function.handler"
+  handler          = "index.handler"
   runtime          = "nodejs18.x"
-  source_code_hash = filebase64sha256("${path.module}/dummy-lambda.zip")
+  source_code_hash = filebase64sha256("${path.module}/../lambdas/node/dist/ingestion.zip")
+
+  timeout = 15 # Set timeout in seconds (maximum: 900 seconds)
 
   environment {
     variables = {
