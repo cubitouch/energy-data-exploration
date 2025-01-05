@@ -5,6 +5,7 @@ import zipfile
 import dlt
 import os
 import csv
+import pprint
 
 # Initialize S3 and SSM clients
 s3 = boto3.client("s3")
@@ -25,7 +26,7 @@ def lambda_handler(event, context):
         zip_file_path = f"/tmp/{decoded_object_key.split('/')[-1]}"
         s3.download_file(bucket_name, decoded_object_key, zip_file_path)
     else:
-        # local testing
+        # TODO: retrieve the most recent file in S3?
         zip_file_path = "/tmp/2025-01-04T16_41_46.338Z.zip"
 
     # Extract the .xls file from the ZIP
@@ -54,14 +55,13 @@ def lambda_handler(event, context):
     # Use DLT to ingest the data into the database
     ingest_to_database(data)
 
-    return {"statusCode": 200, "body": f"Processed {object_key}"}
-
 def ingest_to_database(data):
     # Fetch the DSN from SSM Parameter Store
     response = ssm.get_parameter(Name="/energy-market-france/db-dsn", WithDecryption=True)
     database_dsn = response["Parameter"]["Value"]
 
     # Save the DataFrame to a CSV file in /tmp
+    # we do this to avoid having to install too many dependencies (dlt[parquet]) into the lambda package
     csv_file_path = "/tmp/energy_market_france.csv"
     data.to_csv(csv_file_path, index=False)
     print(f"Data saved to CSV at {csv_file_path}")
@@ -81,12 +81,27 @@ def ingest_to_database(data):
     )
 
     # Use the generator as a resource
-    resource = dlt.resource(csv_generator(csv_file_path), name="raw_energy_market_france")
+    resource = dlt.resource(
+        csv_generator(csv_file_path),
+        name="raw_energy_market_france",
+        primary_key=("date", "heures"),
+        merge_key=("date", "heures", "consommation")
+    )
 
     # Run the pipeline with the resource
-    dlt_pipeline.run(resource, write_disposition="replace")
+    try:
+        # Run the pipeline and capture the summary
+        run_summary = dlt_pipeline.run(resource, write_disposition="merge")
+        print("Pipeline ran successfully!")
+        print(run_summary)
 
-    print("Pipeline run successfully.")
+    except Exception as e:
+        # Handle errors and clean up the pipeline
+        print(f"Pipeline execution failed with error: {str(e)}")
+        print("Dropping failed jobs...")
+        dlt_pipeline.drop()
+        print("Failed jobs cleared.")
+    return
 
 if __name__ == '__main__':
     lambda_handler(None, None)
