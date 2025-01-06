@@ -1,0 +1,44 @@
+
+version: 2
+
+models:
+  - name: stg_energy_market_france
+    description: "Energy consumption and topology"
+    columns:
+      - name: t
+        description: "Timestamp, the primary key for this table (by 15 minutes increments)"
+        data_tests:
+          - unique
+          - not_null
+      
+      # TODO: Confirm unit (kWh? MWh? W? MW?)
+      - name: actual
+        description: "The effective energy consumption for the period"
+      - name: estimated_d1
+        description: "Previous day estimated energy consumption for the period"
+      - name: estimated_d
+        description: "Day estimated energy consumption for the period"
+
+      - name: fuel_oil
+        description: "Amount of Fuel based energy consumed for the period"
+      - name: coal
+        description: "Amount of Coal based energy consumed for the period"
+      - name: gas
+        description: "Amount of Gas based energy consumed for the period"
+      - name: nuclear
+        description: "Amount of Nuclear based energy consumed for the period"
+      - name: wind
+        description: "Amount of Wind based energy consumed for the period"
+      - name: solar
+        description: "Amount of Solar based energy consumed for the period"
+      - name: hydropower
+        description: "Amount of Hydropower based energy consumed for the period"
+      - name: pumped_storage
+        description: "Amount of Pumped Storage based energy consumed for the period"
+      - name: bioenergy
+        description: "Amount of Bioenergy based energy consumed for the period"
+
+      - name: renewable
+        description: "Amount of renewable based energy consumed for the period"
+      - name: non_renewable
+        description: "Amount of non renewable based energy consumed for the period"
