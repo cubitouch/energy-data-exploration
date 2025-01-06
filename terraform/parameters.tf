@@ -11,9 +11,5 @@ resource "aws_ssm_parameter" "file_url" {
 resource "aws_ssm_parameter" "db_dsn" {
   name  = "/energy-market-france/db-dsn"
   type  = "String"
-  value = "PLACEHOLDER"
-
-  lifecycle {
-    ignore_changes = [value, version]
-  }
+  value = aiven_pg.energy_db.service_uri
 }

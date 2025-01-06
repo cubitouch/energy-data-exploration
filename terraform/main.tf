@@ -10,6 +10,13 @@ terraform {
     region         = "eu-north-1"
     encrypt        = true
   }
+  
+  required_providers {
+    aiven = {
+      source  = "aiven/aiven"
+      version = "~> 3.4"
+    }
+  }
 }
 
 data "aws_caller_identity" "current" {}
