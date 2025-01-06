@@ -1,5 +1,5 @@
-terraform/.terraform
-terraform/.terraform.lock.hcl
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
 node_modules
 lambdas/node/dist
 lambdas/python/package
