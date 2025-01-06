@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 WITH typed as (
     SELECT
         TO_TIMESTAMP(date || ' ' || heures, 'YYYY-MM-DD HH24:MI') AS t,
