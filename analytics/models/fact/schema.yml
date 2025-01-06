@@ -20,7 +20,7 @@ models:
         description: "The effective renewable energy consumption for the period"
         data_tests:
           - not_null
-      - name: usage_non_enewable
+      - name: usage_non_renewable
         description: "The effective non renewable energy consumption for the period"
         data_tests:
           - not_null
