@@ -1,0 +1,26 @@
+
+version: 2
+
+models:
+  - name: fact_energy_usage_france
+    description: "Energy consumption over time"
+    columns:
+      - name: timestamp_hour
+        description: "Timestamp, the primary key for this table (by 15 minutes increments)"
+        data_tests:
+          - unique
+          - not_null
+      
+      # TODO: Confirm unit (kWh? MWh? W? MW?)
+      - name: usage
+        description: "The effective energy consumption for the period"
+        data_tests:
+          - not_null
+      - name: usage_renewable
+        description: "The effective renewable energy consumption for the period"
+        data_tests:
+          - not_null
+      - name: usage_non_enewable
+        description: "The effective non renewable energy consumption for the period"
+        data_tests:
+          - not_null
