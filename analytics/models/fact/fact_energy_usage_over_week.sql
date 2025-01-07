@@ -8,5 +8,5 @@ SELECT
     EXTRACT(HOUR FROM t) AS hour,
     AVG(actual) AS usage
 FROM {{ ref('stg_energy_market_france') }}
-GROUP BY 1, 2, 3, 4
-ORDER BY 1, 2, 3, 4
+GROUP BY 1, 2, 3, 4, 5
+ORDER BY 1, 2, 3, 4, 5
