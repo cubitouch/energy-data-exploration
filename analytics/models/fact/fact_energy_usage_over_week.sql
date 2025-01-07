@@ -1,6 +1,7 @@
 {{ config(materialized='table') }}
 
 SELECT
+    DATE_TRUNC('month', t) AS timestamp_month,
     EXTRACT(YEAR FROM t) AS year,
     EXTRACT(MONTH FROM t) AS month,
     EXTRACT(DOW FROM t) AS day_of_week,

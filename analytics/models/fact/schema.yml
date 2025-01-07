@@ -28,6 +28,10 @@ models:
   - name: fact_energy_usage_over_week
     description: "Energy consumption over week (day and hour), broken down per year and month"
     columns:
+      - name: timestamp_month
+        description: "Timestamp of the beginning of the month"
+        data_tests:
+          - not_null
       - name: year
         description: "Year as integer"
         data_tests:
