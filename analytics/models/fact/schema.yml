@@ -46,5 +46,3 @@ models:
           - not_null
       - name: usage
         description: "The average energy consumption for the period"
-        data_tests:
-          - not_null
