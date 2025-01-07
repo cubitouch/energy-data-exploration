@@ -1,6 +1,12 @@
 
 version: 2
 
+sources:
+  - name: raw_energy
+    schema: energy_market_france
+    tables:
+      - name: raw_energy_market_france
+
 models:
   - name: stg_energy_market_france
     description: "Energy consumption and topology"

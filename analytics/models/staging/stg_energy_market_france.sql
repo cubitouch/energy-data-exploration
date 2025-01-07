@@ -52,7 +52,7 @@ WITH typed as (
             WHEN bio_nergies IN ('', 'ND') THEN NULL
             ELSE bio_nergies::NUMERIC
         END AS bioenergy
-    FROM energy_market_france.raw_energy_market_france
+    FROM {{ source('raw_energy', 'raw_energy_market_france') }}
 )
 
 SELECT
