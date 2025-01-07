@@ -1,6 +1,5 @@
 {{ config(materialized='table') }}
 
-
 SELECT
     date_trunc('hour', t) as timestamp_hour,
     SUM(actual) as usage,

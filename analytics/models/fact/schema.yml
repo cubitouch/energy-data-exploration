@@ -24,3 +24,27 @@ models:
         description: "The effective non renewable energy consumption for the period"
         data_tests:
           - not_null
+
+  - name: fact_energy_usage_over_week
+    description: "Energy consumption over week (day and hour), broken down per year and month"
+    columns:
+      - name: year
+        description: "Year as integer"
+        data_tests:
+          - not_null
+      - name: month
+        description: "Month as integer"
+        data_tests:
+          - not_null
+      - name: day_of_week
+        description: "Day of week as integer (0 -> Sunday)"
+        data_tests:
+          - not_null
+      - name: hour
+        description: "Hour as integer"
+        data_tests:
+          - not_null
+      - name: usage
+        description: "The average energy consumption for the period"
+        data_tests:
+          - not_null
