@@ -23,10 +23,6 @@ export default {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Titillium+Web"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Paytone+One"
-    />
   `,
 
   // The path to the source root.
