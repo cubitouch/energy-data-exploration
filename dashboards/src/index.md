@@ -62,7 +62,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv();
       color: {
         type: "linear",
         range: d3.quantize(d3.scaleLinear()
-          .domain([0, 0.5, 1]) // Relative positions for the colors
+          .domain([0, 0.5, 0.75, 0.9, 1]) // Relative positions for the colors
           .range(["#384259", "#748899", "#cbefe2", "#ebf9f4", "#ffffff"]) // Start, middle, and end colors
           .interpolate(d3.interpolateRgb), 20), // Use RGB interpolation
         label: "Average Usage"
@@ -75,8 +75,8 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv();
       },
       y: {
         label: "",
-        tickFormat: d => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d], // Adjust for Monday-first
-        domain: ['1', '2', '3', '4', '5', '6', '0'], // Ensure Monday (1) to Sunday (7) order
+        tickFormat: d => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d],
+        domain: ['1', '2', '3', '4', '5', '6', '0'], // Ensure Monday (1) to Sunday (0) order
         type: "band"
       }
     }))
