@@ -29,7 +29,7 @@ jobs:
           START_TIME=$(date +%s000)  # Current time in milliseconds
           echo "Monitoring logs from $LOG_GROUP_NAME starting at $START_TIME..."
 
-          COMPLETION_MESSAGE="Data load complete"  # Define the message that indicates completion
+          COMPLETION_MESSAGE="Pipeline ran successfully!"  # Define the message that indicates completion
           TIMEOUT=900  # Timeout in seconds (15 minutes)
           POLL_INTERVAL=30  # Poll every 30 seconds
 
@@ -38,7 +38,7 @@ jobs:
             LOGS=$(aws logs filter-log-events \
               --log-group-name $LOG_GROUP_NAME \
               --start-time $START_TIME \
-              --query "events[?contains(message, \`$COMPLETION_MESSAGE\`) == \`true\`].message" \
+              --query "events[?contains(message, 'Pipeline ran successfully!')].message" \
               --region eu-north-1 \
               --output text)
 
