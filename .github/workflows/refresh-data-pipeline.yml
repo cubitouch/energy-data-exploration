@@ -1,0 +1,95 @@
+name: Refresh Data Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  refresh_data:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Trigger the ingestion Lambda and wait for its execution to complete
+      - name: Trigger ingestion Lambda and wait
+        id: trigger_lambda
+        env:
+          AWS_REGION: eu-north-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          RESPONSE=$(aws lambda invoke \
+            --function-name energy-market-france-ingestion \
+            --region $AWS_REGION \
+            --query '{"RequestId": @.ResponseMetadata.RequestId, "Status": @.StatusCode}' \
+            --output json \
+            response.json)
+          echo "Response: $RESPONSE"
+
+          REQUEST_ID=$(echo "$RESPONSE" | jq -r '.RequestId')
+          echo "REQUEST_ID=$REQUEST_ID" >> $GITHUB_ENV
+          echo "Triggered ingestion Lambda with Request ID: $REQUEST_ID"
+
+      # Step 2: Monitor upsert Lambda logs and ensure they correspond to the new execution
+      - name: Monitor upsert Lambda logs
+        env:
+          AWS_REGION: eu-north-1
+          REQUEST_ID: ${{ env.REQUEST_ID }}
+        run: |
+          LOG_GROUP_NAME="/aws/lambda/energy-market-france-upsert"
+          echo "Looking for logs for ingestion Request ID: $REQUEST_ID"
+
+          NEW_LOG_FOUND=0
+          while [ $NEW_LOG_FOUND -eq 0 ]; do
+            echo "Polling for new log events..."
+            LOGS=$(aws logs filter-log-events \
+              --log-group-name $LOG_GROUP_NAME \
+              --region $AWS_REGION \
+              --query 'events[?contains(message, `REQUEST_ID`)].message' \
+              --output text)
+
+            if [[ "$LOGS" == *"$REQUEST_ID"* ]]; then
+              NEW_LOG_FOUND=1
+              echo "Log events for Request ID $REQUEST_ID found!"
+            else
+              echo "Waiting for logs from new execution..."
+              sleep 30
+            fi
+          done
+
+      # Step 3: Trigger dbt Cloud job and wait for completion
+      - name: Trigger dbt Cloud job and wait
+        id: trigger_dbt_job
+        env:
+          DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
+        run: |
+          JOB_ID=70471823414370
+          echo "Triggering dbt Cloud job..."
+          RESPONSE=$(curl -X POST "https://cloud.getdbt.com/api/v2/accounts/70471823412077/jobs/$JOB_ID/run/" \
+            -H "Authorization: Bearer $DBT_API_KEY" \
+            -H "Content-Type: application/json")
+          RUN_ID=$(echo "$RESPONSE" | jq -r '.data.id')
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+          echo "Triggered dbt job with Run ID: $RUN_ID"
+
+          echo "Waiting for dbt Cloud job to complete..."
+          STATUS="running"
+          while [[ "$STATUS" == "running" || "$STATUS" == "queued" ]]; do
+            sleep 30
+            STATUS=$(curl -X GET "https://cloud.getdbt.com/api/v2/accounts/70471823412077/runs/$RUN_ID/" \
+              -H "Authorization: Bearer $DBT_API_KEY" \
+              -H "Content-Type: application/json" | jq -r '.data.status_humanized' | tr '[:upper:]' '[:lower:]')
+            echo "Current job status: $STATUS"
+          done
+
+          if [[ "$STATUS" == "success" ]]; then
+            echo "dbt Cloud job completed successfully."
+          else
+            echo "dbt Cloud job failed with status: $STATUS"
+            exit 1
+          fi
+
+      # Step 4: Redeploy Vercel deployment
+      - name: Redeploy on Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          curl -X POST "https://api.vercel.com/v13/deployments/{deployment_id}/retrigger" \
+            -H "Authorization: Bearer $VERCEL_TOKEN"
