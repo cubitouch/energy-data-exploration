@@ -16,11 +16,12 @@ jobs:
 
       - name: Trigger ingestion Lambda
         run: |
-          aws lambda invoke \
+          RESPONSE=$(aws lambda invoke \
             --function-name energy-market-france-ingestion \
             --region eu-north-1 \
-            output.json
-          echo "Triggered ingestion Lambda."
+            output.json)
+          echo "Lambda Response: $RESPONSE"
+          cat output.json
 
       - name: Monitor upsert Lambda logs for completion
         run: |
