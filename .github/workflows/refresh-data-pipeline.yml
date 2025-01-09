@@ -7,20 +7,20 @@ jobs:
   refresh_data:
     runs-on: ubuntu-latest
     steps:
-    - name: Check AWS secrets accessibility
-      run: |
-        if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
-          echo "AWS_ACCESS_KEY_ID is not accessible"
-          exit 1
-        else
-          echo "AWS_ACCESS_KEY_ID is accessible"
-        fi
-        if [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
-          echo "AWS_SECRET_ACCESS_KEY is not accessible"
-          exit 1
-        else
-          echo "AWS_SECRET_ACCESS_KEY is accessible"
-        fi
+      - name: Check AWS secrets accessibility
+        run: |
+          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
+            echo "AWS_ACCESS_KEY_ID is not accessible"
+            exit 1
+          else
+            echo "AWS_ACCESS_KEY_ID is accessible"
+          fi
+          if [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
+            echo "AWS_SECRET_ACCESS_KEY is not accessible"
+            exit 1
+          else
+            echo "AWS_SECRET_ACCESS_KEY is accessible"
+          fi
         
       # Step 0: Configure AWS credentials
       - name: Configure AWS credentials
