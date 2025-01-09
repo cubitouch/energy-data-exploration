@@ -65,9 +65,12 @@ jobs:
         run: |
           JOB_ID=70471823414370
           echo "Triggering dbt Cloud job..."
-          RESPONSE=$(curl -X POST "https://cloud.getdbt.com/api/v2/accounts/70471823412077/jobs/$JOB_ID/run/" \
+          RESPONSE=$(curl -X POST "https://ea043.us1.dbt.com/api/v2/accounts/70471823412077/jobs/$JOB_ID/run/" \
             -H "Authorization: Bearer $DBT_API_KEY" \
-            -H "Content-Type: application/json")
+            -H "Content-Type: application/json" \
+            -d '{
+              "cause": "Triggered by GitHub Action"
+            }')
           echo "Raw Response: $RESPONSE"
           RUN_ID=$(echo "$RESPONSE" | jq -r '.data.id')
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
@@ -77,7 +80,7 @@ jobs:
           STATUS="running"
           while [[ "$STATUS" == "running" || "$STATUS" == "queued" ]]; do
             sleep 30
-            STATUS=$(curl -X GET "https://cloud.getdbt.com/api/v2/accounts/70471823412077/runs/$RUN_ID/" \
+            STATUS=$(curl -X GET "https://ea043.us1.dbt.com/api/v2/accounts/70471823412077/runs/$RUN_ID/" \
               -H "Authorization: Bearer $DBT_API_KEY" \
               -H "Content-Type: application/json" | jq -r '.data.status_humanized' | tr '[:upper:]' '[:lower:]')
             echo "Current job status: $STATUS"
