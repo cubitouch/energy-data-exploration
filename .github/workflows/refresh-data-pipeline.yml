@@ -27,14 +27,15 @@ jobs:
             --function-name energy-market-france-ingestion \
             --region $AWS_REGION \
             --invocation-type RequestResponse \
-            --query '{"RequestId": @.ResponseMetadata.RequestId, "Status": @.StatusCode}' \
+            --cli-binary-format raw-in-base64-out \
             --output json \
             response.json)
-          echo "Response: $RESPONSE"
+          echo "Lambda Response: $RESPONSE"
 
-          REQUEST_ID=$(echo "$RESPONSE" | jq -r '.RequestId')
+          REQUEST_ID=$(echo "$RESPONSE" | jq -r '.ResponseMetadata.RequestId')
           echo "REQUEST_ID=$REQUEST_ID" >> $GITHUB_ENV
-          echo "Triggered ingestion Lambda with Request ID: $REQUEST_ID"
+          echo "Captured Request ID: $REQUEST_ID"
+          exit 1
 
       # Step 2: Monitor upsert Lambda logs and ensure they correspond to the new execution
       - name: Monitor upsert Lambda logs
