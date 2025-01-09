@@ -116,5 +116,4 @@ jobs:
 
           # Trigger the redeploy
           npm i -g vercel
-          vercel --token $VERCEL_TOKEN
-          vercel redeploy $DEPLOYMENT_ID --yes
+          vercel redeploy $DEPLOYMENT_ID --token $VERCEL_TOKEN --yes
