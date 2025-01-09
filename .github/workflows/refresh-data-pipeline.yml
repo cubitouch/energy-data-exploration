@@ -116,4 +116,4 @@ jobs:
 
           # Trigger the redeploy
           npm i -g vercel
-          vercel redeploy $DEPLOYMENT_ID --token $VERCEL_TOKEN
+          vercel redeploy $DEPLOYMENT_ID --token $VERCEL_TOKEN --scope hugo-carnicellis-projects
