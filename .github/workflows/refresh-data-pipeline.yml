@@ -7,6 +7,14 @@ jobs:
   refresh_data:
     runs-on: ubuntu-latest
     steps:
+      # Step 0: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
       # Step 1: Trigger the ingestion Lambda and wait for its execution to complete
       - name: Trigger ingestion Lambda and wait
         id: trigger_lambda
