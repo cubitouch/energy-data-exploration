@@ -26,6 +26,7 @@ jobs:
           RESPONSE=$(aws lambda invoke \
             --function-name energy-market-france-ingestion \
             --region $AWS_REGION \
+            --invocation-type RequestResponse \
             --query '{"RequestId": @.ResponseMetadata.RequestId, "Status": @.StatusCode}' \
             --output json \
             response.json)
