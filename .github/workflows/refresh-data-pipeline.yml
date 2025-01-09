@@ -18,7 +18,8 @@ jobs:
         run: |
           aws lambda invoke \
             --function-name energy-market-france-ingestion \
-            --region eu-north-1
+            --region eu-north-1 \
+            output.json
           echo "Triggered ingestion Lambda."
 
       - name: Monitor upsert Lambda logs for completion
