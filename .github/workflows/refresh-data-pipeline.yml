@@ -7,7 +7,6 @@ jobs:
   refresh_data:
     runs-on: ubuntu-latest
     steps:
-      # Step 0: Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -15,53 +14,47 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      # Step 1: Trigger the ingestion Lambda and wait for its execution to complete
-      - name: Trigger ingestion Lambda and wait
-        id: trigger_lambda
-        env:
-          AWS_REGION: eu-north-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Trigger ingestion Lambda
         run: |
-          RESPONSE=$(aws lambda invoke \
+          aws lambda invoke \
             --function-name energy-market-france-ingestion \
-            --region $AWS_REGION \
-            --invocation-type RequestResponse \
+            --region eu-north-1 \
             --cli-binary-format raw-in-base64-out \
-            --output json \
-            response.json)
-          echo "Lambda Response: $RESPONSE"
+            output.json
+          echo "Triggered ingestion Lambda."
 
-          REQUEST_ID=$(echo "$RESPONSE" | jq -r '.ResponseMetadata.RequestId')
-          echo "REQUEST_ID=$REQUEST_ID" >> $GITHUB_ENV
-          echo "Captured Request ID: $REQUEST_ID"
-          exit 1
-
-      # Step 2: Monitor upsert Lambda logs and ensure they correspond to the new execution
-      - name: Monitor upsert Lambda logs
-        env:
-          AWS_REGION: eu-north-1
-          REQUEST_ID: ${{ env.REQUEST_ID }}
+      - name: Monitor upsert Lambda logs for completion
         run: |
           LOG_GROUP_NAME="/aws/lambda/energy-market-france-upsert"
-          echo "Looking for logs for ingestion Request ID: $REQUEST_ID"
+          START_TIME=$(date +%s000)  # Current time in milliseconds
+          echo "Monitoring logs from $LOG_GROUP_NAME starting at $START_TIME..."
 
-          NEW_LOG_FOUND=0
-          while [ $NEW_LOG_FOUND -eq 0 ]; do
-            echo "Polling for new log events..."
+          COMPLETION_MESSAGE="Data load complete"  # Define the message that indicates completion
+          TIMEOUT=900  # Timeout in seconds (15 minutes)
+          POLL_INTERVAL=30  # Poll every 30 seconds
+
+          while true; do
+            CURRENT_TIME=$(date +%s000)
             LOGS=$(aws logs filter-log-events \
               --log-group-name $LOG_GROUP_NAME \
-              --region $AWS_REGION \
-              --query 'events[?contains(message, `REQUEST_ID`)].message' \
+              --start-time $START_TIME \
+              --query "events[?contains(message, \`$COMPLETION_MESSAGE\`) == \`true\`].message" \
+              --region eu-north-1 \
               --output text)
 
-            if [[ "$LOGS" == *"$REQUEST_ID"* ]]; then
-              NEW_LOG_FOUND=1
-              echo "Log events for Request ID $REQUEST_ID found!"
-            else
-              echo "Waiting for logs from new execution..."
-              sleep 30
+            if [[ -n "$LOGS" ]]; then
+              echo "Upsert Lambda completed successfully."
+              break
             fi
+
+            ELAPSED=$((CURRENT_TIME / 1000 - START_TIME / 1000))
+            if [[ $ELAPSED -ge $TIMEOUT ]]; then
+              echo "Timeout reached while waiting for upsert Lambda to complete."
+              exit 1
+            fi
+
+            echo "Waiting for upsert Lambda to complete..."
+            sleep $POLL_INTERVAL
           done
 
       # Step 3: Trigger dbt Cloud job and wait for completion
