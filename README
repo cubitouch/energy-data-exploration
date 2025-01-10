@@ -11,8 +11,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 # TODO
 
-* Automate the above (github workflow?)
-* Schedule ingestion
+* Schedule ingestion, dbt cloud, vercel
 * Terraform Dbt Cloud
 * Terraform Vercel
-* CICD
+* CICD for each tech
