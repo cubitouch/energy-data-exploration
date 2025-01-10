@@ -65,6 +65,29 @@ resource "aws_lambda_function" "ingestion" {
   }
 }
 
+# Create an EventBridge rule for scheduling
+resource "aws_cloudwatch_event_rule" "midnight_schedule" {
+  name                = "energy-market-ingestion-schedule"
+  description         = "Triggers the ingestion Lambda function daily at midnight"
+  schedule_expression = "cron(0 0 * * ? *)" # Every day at midnight UTC
+}
+
+# Attach the Lambda function as a target of the EventBridge rule
+resource "aws_cloudwatch_event_target" "ingestion_lambda_target" {
+  rule      = aws_cloudwatch_event_rule.midnight_schedule.name
+  target_id = "ingestion-lambda-target"
+  arn       = aws_lambda_function.ingestion.arn
+}
+
+# Grant EventBridge permission to invoke the Lambda function
+resource "aws_lambda_permission" "allow_eventbridge" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.ingestion.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.midnight_schedule.arn
+}
+
 # upsert lambda
 resource "aws_iam_role" "upsert_lambda_role" {
   name = "lambda-upsert-role"

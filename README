@@ -11,7 +11,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 # TODO
 
-* Schedule ingestion, dbt cloud, vercel
+* Schedule vercel
 * Terraform Dbt Cloud
 * Terraform Vercel
 * CICD for each tech
