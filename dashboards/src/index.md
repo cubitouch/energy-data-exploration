@@ -55,13 +55,3 @@ import { energyUsageHeatmap } from "./components/energy-usage-heatmap.js";
   </div>
 </div>
 
-<style>
-
-* {
-  font-family: "Titillium Web", sans-serif;
-}
-:root {
-  --theme-background-b: rgb(56, 66, 89);
-}
-
-</style>

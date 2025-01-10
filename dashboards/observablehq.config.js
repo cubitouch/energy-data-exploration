@@ -23,6 +23,16 @@ export default {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Titillium+Web"
     />
+    <style>
+
+    * {
+      font-family: "Titillium Web", sans-serif;
+    }
+    :root {
+      --theme-background-b: rgb(56, 66, 89);
+    }
+
+    </style>
   `,
 
   // The path to the source root.
