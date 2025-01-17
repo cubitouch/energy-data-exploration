@@ -1,4 +1,12 @@
 import pkg from "pg";
+import dotenv from "dotenv";
+import assert from "node:assert";
+import { csvFormat } from "d3-dsv";
+
+dotenv.config();
+
+const DSN = process.env.DATABASE_URL;
+assert(!!DSN);
 const { Client } = pkg;
 
 export async function fetchData(dsn, query) {
@@ -15,5 +23,15 @@ export async function fetchData(dsn, query) {
     return res.rows;
   } finally {
     await client.end();
+  }
+}
+
+export async function safeFetchData(query) {
+  try {
+    const data = await fetchData(DSN, query);
+    process.stdout.write(csvFormat(data));
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    process.exit(1);
   }
 }

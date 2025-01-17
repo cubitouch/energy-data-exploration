@@ -1,12 +1,4 @@
-import { csvFormat } from "d3-dsv";
-import dotenv from "dotenv";
-import { fetchData } from "../utils/data_loader.js";
-import assert from "node:assert";
-
-dotenv.config();
-
-const DSN = process.env.DATABASE_URL;
-assert(!!DSN);
+import { safeFetchData } from "../utils/data_loader.js";
 
 const QUERY = `
   SELECT
@@ -17,12 +9,4 @@ const QUERY = `
   ORDER BY 1
 `;
 
-(async () => {
-  try {
-    const data = await fetchData(DSN, QUERY);
-    process.stdout.write(csvFormat(data));
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    process.exit(1);
-  }
-})();
+(async () => safeFetchData(QUERY))();
