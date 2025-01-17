@@ -38,7 +38,8 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv();
           y: "usage",
           fill: "white", 
           tip: true,
-          title: d => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}\nUsage: ${d3.format(".2s")(d.usage)} MW`
+          title: d => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+          \nUsage: ${d3.format(".2s")(d.usage)} MW`
         }),
       ]
     }))
