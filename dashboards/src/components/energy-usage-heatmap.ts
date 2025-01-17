@@ -16,6 +16,12 @@ export function energyUsageHeatmap(
         y: "day_of_week",
         fill: "usage",
         tip: true,
+        title: (data) => `
+        ${
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][data.day_of_week]
+        } ${data.hour}:00 - ${Number(data.hour) + 1}:00\n
+        Usage: ${ d3.format(".2s")(data.usage)} MW
+      `,
       }),
     ],
     color: {
