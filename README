@@ -13,10 +13,10 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 * Ingestion - 0AM UTC
 * Dbt Cloud - 1AM UTC
+* Vercel - 2AM UTC
 
 # TODO
 
-* Schedule vercel
 * Terraform Dbt Cloud
 * Terraform Vercel
 * CICD for each tech
