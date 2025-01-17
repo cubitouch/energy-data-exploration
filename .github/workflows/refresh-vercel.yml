@@ -1,0 +1,39 @@
+name: Redeploy to Vercel
+
+on:
+  schedule:
+    # Runs every day at 2AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Redeploy on Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          # Fetch the latest deployment
+          PROJECT_ID="energy-data-exploration"
+          DEPLOYMENTS=$(curl -s -X GET "https://api.vercel.com/v6/deployments?app=$PROJECT_ID" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            -H "Content-Type: application/json")
+          
+          echo "Deployments: $DEPLOYMENTS"
+
+          DEPLOYMENT_ID=$(echo "$DEPLOYMENTS" | jq -r '.deployments[0].uid')
+          if [[ -z "$DEPLOYMENT_ID" ]]; then
+            echo "Failed to fetch the latest deployment ID."
+            exit 1
+          fi
+
+          echo "Latest Deployment ID: $DEPLOYMENT_ID"
+
+          # Trigger the redeploy
+          npm i -g vercel
+          vercel redeploy $DEPLOYMENT_ID --token $VERCEL_TOKEN --scope hugo-carnicellis-projects
