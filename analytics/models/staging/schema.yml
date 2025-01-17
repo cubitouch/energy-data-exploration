@@ -9,15 +9,13 @@ sources:
 
 models:
   - name: stg_energy_market_france
-    description: "Energy consumption and topology"
+    description: "Energy (MW) consumption and topology"
     columns:
       - name: t
         description: "Timestamp, the primary key for this table (by 15 minutes increments)"
         data_tests:
           - unique
           - not_null
-      
-      # TODO: Confirm unit (kWh? MWh? W? MW?)
       - name: actual
         description: "The effective energy consumption for the period"
       - name: estimated_d1

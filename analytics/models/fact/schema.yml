@@ -3,15 +3,13 @@ version: 2
 
 models:
   - name: fact_energy_usage_france
-    description: "Energy consumption over time"
+    description: "Energy (MW) consumption over time"
     columns:
       - name: timestamp_hour
         description: "Timestamp, the primary key for this table (by 15 minutes increments)"
         data_tests:
           - unique
           - not_null
-      
-      # TODO: Confirm unit (kWh? MWh? W? MW?)
       - name: usage
         description: "The effective energy consumption for the period"
         data_tests:
@@ -38,7 +36,7 @@ models:
           - not_null
 
   - name: fact_energy_usage_over_week
-    description: "Energy consumption over week (day and hour), broken down per year and month"
+    description: "Energy (MW) consumption over week (day and hour), broken down per year and month"
     columns:
       - name: timestamp_month
         description: "Timestamp of the beginning of the month"
