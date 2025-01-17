@@ -6,23 +6,7 @@ export function energyUsageHeatmap(
   width: number,
   height: number
 ) {
-  // Create a tooltip container
-  const tooltip = document.createElement("div");
-  tooltip.style.position = "absolute";
-  tooltip.style.pointerEvents = "none";
-  tooltip.style.background = "rgb(56, 66, 89)";
-  tooltip.style.border = "1px solid #ccc";
-  tooltip.style.padding = "5px 10px";
-  tooltip.style.borderRadius = "5px";
-  tooltip.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
-  tooltip.style.fontFamily = "sans-serif";
-  tooltip.style.fontSize = "12px";
-  tooltip.style.lineHeight = "1.4";
-  tooltip.style.visibility = "hidden";
-  document.body.appendChild(tooltip);
-
-  // Create the heatmap
-  const plot = Plot.plot({
+  return Plot.plot({
     width,
     height: height - 32,
     title: "Energy usage over the week last month",
@@ -31,6 +15,7 @@ export function energyUsageHeatmap(
         x: "hour",
         y: "day_of_week",
         fill: "usage",
+        tip: true,
       }),
     ],
     color: {
@@ -58,26 +43,4 @@ export function energyUsageHeatmap(
       type: "band",
     },
   });
-
-  // Attach event listeners to cells after rendering
-  const cells = plot.querySelectorAll("rect"); // Select cells (SVG rect elements)
-  cells.forEach((cell, i) => {
-    const data = usageHeatmap[i]; // Match data to each cell
-    cell.addEventListener("pointerenter", (event) => {
-      tooltip.style.visibility = "visible";
-      tooltip.style.left = `${event.pageX + 10}px`;
-      tooltip.style.top = `${event.pageY + 10}px`;
-      tooltip.innerHTML = `
-        ${
-          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][data.day_of_week]
-        } ${data.hour}:00 - ${Number(data.hour) + 1}:00<br>
-        <strong>Usage:</strong> ${Number(data.usage).toFixed(2)}
-      `;
-    });
-    cell.addEventListener("pointerleave", () => {
-      tooltip.style.visibility = "hidden";
-    });
-  });
-
-  return plot;
 }
