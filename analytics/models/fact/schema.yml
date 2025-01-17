@@ -16,6 +16,18 @@ models:
         description: "The effective energy consumption for the period"
         data_tests:
           - not_null
+      - name: usage_min
+        description: "The minimum energy consumption for the period"
+        data_tests:
+          - not_null
+      - name: usage_max
+        description: "The maximum energy consumption for the period"
+        data_tests:
+          - not_null
+      - name: usage_average
+        description: "The average energy consumption for the period"
+        data_tests:
+          - not_null
       - name: usage_renewable
         description: "The effective renewable energy consumption for the period"
         data_tests:

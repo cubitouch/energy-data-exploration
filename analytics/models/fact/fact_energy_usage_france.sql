@@ -3,6 +3,9 @@
 SELECT
     date_trunc('hour', t) AS timestamp_hour,
     SUM(actual) AS usage,
+    MIN(actual) AS usage_min,
+    MAX(actual) AS usage_max,
+    AVG(actual) AS usage_average,
     SUM(renewable) AS usage_renewable,
     SUM(non_renewable) AS usage_non_renewable
 FROM {{ ref('stg_energy_market_france') }}
