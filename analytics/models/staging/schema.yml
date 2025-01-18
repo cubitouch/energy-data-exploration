@@ -1,4 +1,3 @@
-
 version: 2
 
 sources:
@@ -22,6 +21,9 @@ models:
         description: "Previous day estimated energy consumption for the period"
       - name: estimated_d
         description: "Day estimated energy consumption for the period"
+
+      - name: co2_ratio
+        description: "Energy to CO2 ratio for the period"
 
       - name: fuel_oil
         description: "Amount of Fuel based energy consumed for the period"

@@ -16,6 +16,8 @@ WITH typed as (
             ELSE pr_vision_j::NUMERIC
         END AS estimated_d,
 
+        taux_de_co2::NUMERIC AS co2_ratio,
+
         CASE
             WHEN fioul IN ('', 'ND') THEN NULL
             ELSE fioul::NUMERIC
@@ -61,6 +63,8 @@ SELECT
     actual,
     estimated_d1,
     estimated_d,
+
+    co2_ratio,
 
     fuel_oil,
     coal,
