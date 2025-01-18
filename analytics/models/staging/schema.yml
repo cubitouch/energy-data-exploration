@@ -23,7 +23,7 @@ models:
         description: "Day estimated energy consumption for the period"
 
       - name: co2_ratio
-        description: "Energy to CO2 ratio for the period"
+        description: "Energy (kWh) to CO2 (gram) ratio for the period"
 
       - name: fuel_oil
         description: "Amount of Fuel based energy consumed for the period"

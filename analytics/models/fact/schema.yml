@@ -26,6 +26,10 @@ models:
         description: "The average energy consumption for the period"
         data_tests:
           - not_null
+      - name: co2_impact
+        description: "The co2 (gram) impact for the period total energy consumption"
+        data_tests:
+          - not_null
       - name: usage_renewable
         description: "The effective renewable energy consumption for the period"
         data_tests:
