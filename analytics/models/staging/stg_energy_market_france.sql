@@ -16,7 +16,10 @@ WITH typed as (
             ELSE pr_vision_j::NUMERIC
         END AS estimated_d,
 
-        taux_de_co2::NUMERIC AS co2_ratio,
+        CASE
+            WHEN taux_de_co2 IN ('', 'ND') THEN NULL
+            ELSE taux_de_co2::NUMERIC
+        END AS co2_ratio,
 
         CASE
             WHEN fioul IN ('', 'ND') THEN NULL
