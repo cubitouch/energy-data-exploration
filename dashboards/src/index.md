@@ -7,39 +7,75 @@ toc: false
 </div>
 
 ```js
-const usage = FileAttachment("data/energy-usage.csv").csv();
-const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv();
+const usage = FileAttachment("data/energy-usage.csv").csv({ typed: true });
+const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
+  typed: true,
+});
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card">
   ${
-    resize((width) => Plot.plot({
-      title: "Daily Energy Usage over the Last 30 Days",
-      width,
+    resize((width, height) => Plot.plot({
+      title: "Energy Usage and Carbon Impact over the Last 30 Days",
+      width, 
+      height: height - 32,
+      marginBottom: 64,
       marginLeft: 64,
+      marginRight: 64,
       x: {
         tickRotate: -45,
         label: '',
-        type: "time",
-        tickFormat: d => d3.timeFormat("%b %d")(d)
+        type: "band",
+        tickFormat: "%b %d",
+        nice: true,
       },
       y: {
         grid: true,
-        label: "MW",
-        domain: [0, d3.max(usage, d => d.usage)],
-        tickFormat: d => d3.format(".2s")(d)
+        label: "Energy Usage (MW)",
+        domain: d3.extent(usage, d => d.usage),
+        tickFormat: ".2s",
+        nice: true,
       },
       marks: [
-        Plot.ruleY([0]),
         Plot.lineY(usage, {x: "timestamp_date", y: "usage"}),
         Plot.dot(usage, {
           x: "timestamp_date",
           y: "usage",
           fill: "white", 
-          tip: true,
-          title: d => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
-          \nUsage: ${d3.format(".2s")(d.usage)} MW`
+        }),
+        () => Plot.plot({
+          // dimensions
+          marginBottom: 64,
+          marginLeft: 64,
+          marginRight: 64,
+          width,
+          height: height - 32,
+          x: {
+            axis: null,
+            type: "band",
+            nice: true,
+          },
+          y: {
+            type: "linear",
+            label: "Co2 Impact (g)",
+            tickFormat: ".2s",
+            axis: "right",
+            line: true,
+            nice: true,
+          },
+          marks: [
+            Plot.barY(usage, {
+              x: "timestamp_date",
+              y: "co2_impact",
+              fill: "#cbefe2",
+              opacity: 0.5,
+              tip: true,
+              title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+              \nImpact: ${d3.format(".2s")(d.co2_impact)} g
+              \nUsage: ${d3.format(".2s")(d.usage)} MW`
+            }),
+          ],
         }),
       ]
     }))
@@ -50,20 +86,21 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv();
   <div class="card">
   ${
     resize((width) => Plot.plot({
-      title: "Daily Range and Average of Energy Usage Over the Last 30 Days",
+      title: "Average Energy Usage Over the Last 30 Days",
       width,
       marginLeft: 64,
       x: {
         tickRotate: -45,
         label: '',
-        type: "time",
-        tickFormat: d => d3.timeFormat("%b %d")(d)
+        type: "band",
+        tickFormat: "%b %d",
+        nice: true,
       },
       y: {
         grid: true,
         label: "MW",
         domain: [0, d3.max(usage, d => d.usage_max)],
-        tickFormat: d => d3.format(".2s")(d)
+        tickFormat: ".2s",
       },
       marks: [
         Plot.ruleY([0]),
@@ -98,4 +135,3 @@ import { energyUsageHeatmap } from "./components/energy-usage-heatmap.js";
     ${resize((width, height) => energyUsageHeatmap(usageHeatmap, width, height))}
   </div>
 </div>
-

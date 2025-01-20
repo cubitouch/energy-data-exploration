@@ -19,9 +19,8 @@ export function energyUsageHeatmap(
         title: (data) => `
         ${
           ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][data.day_of_week]
-        } ${data.hour}:00 - ${Number(data.hour) + 1}:00\n
-        Usage: ${ d3.format(".2s")(data.usage)} MW
-      `,
+        } ${data.hour}:00 - ${data.hour + 1}:00\n
+        Usage: ${d3.format(".2s")(data.usage)} MW`,
       }),
     ],
     color: {
@@ -39,13 +38,13 @@ export function energyUsageHeatmap(
     x: {
       label: "",
       tickFormat: (d) => `${d}:00`, // Format hours as "0:00", "1:00", etc.
-      domain: [...Array(24).keys()].map((t) => t.toString()), // Ensure hours are ordered from 0 to 23
+      domain: [...Array(24).keys()], // Ensure hours are ordered from 0 to 23
       type: "band",
     },
     y: {
       label: "",
       tickFormat: (d) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d],
-      domain: ["1", "2", "3", "4", "5", "6", "0"], // Ensure Monday (1) to Sunday (0) order
+      domain: [1, 2, 3, 4, 5, 6, 0], // Ensure Monday (1) to Sunday (0) order
       type: "band",
     },
   });
