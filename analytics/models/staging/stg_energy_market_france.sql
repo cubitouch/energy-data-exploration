@@ -22,39 +22,39 @@ WITH typed as (
         END AS co2_ratio,
 
         CASE
-            WHEN fioul IN ('', 'ND') THEN NULL
+            WHEN fioul IN ('', 'ND') THEN 0
             ELSE fioul::NUMERIC
         END AS fuel_oil,
         CASE
-            WHEN charbon IN ('', 'ND') THEN NULL
+            WHEN charbon IN ('', 'ND') THEN 0
             ELSE charbon::NUMERIC
         END AS coal,
         CASE
-            WHEN gaz IN ('', 'ND') THEN NULL
+            WHEN gaz IN ('', 'ND') THEN 0
             ELSE gaz::NUMERIC
         END AS gas,
         CASE
-            WHEN nucl_aire IN ('', 'ND') THEN NULL
+            WHEN nucl_aire IN ('', 'ND') THEN 0
             ELSE nucl_aire::NUMERIC
         END AS nuclear,
         CASE
-            WHEN eolien IN ('', 'ND') THEN NULL
+            WHEN eolien IN ('', 'ND') THEN 0
             ELSE eolien::NUMERIC
         END AS wind,
         CASE
-            WHEN solaire IN ('', 'ND') THEN NULL
+            WHEN solaire IN ('', 'ND') THEN 0
             ELSE solaire::NUMERIC
         END AS solar,
         CASE
-            WHEN hydraulique IN ('', 'ND') THEN NULL
+            WHEN hydraulique IN ('', 'ND') THEN 0
             ELSE hydraulique::NUMERIC
         END AS hydropower,
         CASE
-            WHEN pompage IN ('', 'ND') THEN NULL
+            WHEN pompage IN ('', 'ND') THEN 0
             ELSE pompage::NUMERIC
         END AS pumped_storage,
         CASE
-            WHEN bio_nergies IN ('', 'ND') THEN NULL
+            WHEN bio_nergies IN ('', 'ND') THEN 0
             ELSE bio_nergies::NUMERIC
         END AS bioenergy
     FROM {{ source('raw_energy', 'raw_energy_market_france') }}
