@@ -9,18 +9,17 @@ export function energyUsageHeatmap(
   return Plot.plot({
     width,
     height: height - 32,
-    title: "Energy usage over the week last month",
+    title: "Energy Usage Over the Week Last Month",
     marks: [
       Plot.cell(usageHeatmap, {
         x: "hour",
         y: "day_of_week",
         fill: "usage",
         tip: true,
-        title: (data) => `
-        ${
+        title: (data) => `${
           ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][data.day_of_week]
-        } ${data.hour}:00 - ${data.hour + 1}:00\n
-        Usage: ${d3.format(".2s")(data.usage)} MW`,
+        } ${data.hour}:00 - ${data.hour + 1}:00
+        \nUsage: ${d3.format(".2s")(data.usage)} MW`,
       }),
     ],
     color: {
