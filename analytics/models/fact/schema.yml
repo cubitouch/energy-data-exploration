@@ -39,19 +39,19 @@ models:
         data_tests:
           - not_null
       - name: import_england
-        description: "Amount of energy imported from England for the period" (negative means export)"
+        description: "Amount of energy imported from England for the period (negative means export)"
         data_tests:
           - not_null
       - name: import_spain
-        description: "Amount of energy imported from Spain for the period" (negative means export)"
+        description: "Amount of energy imported from Spain for the period (negative means export)"
         data_tests:
           - not_null
       - name: import_italy
-        description: "Amount of energy imported from Italy for the period" (negative means export)"
+        description: "Amount of energy imported from Italy for the period (negative means export)"
         data_tests:
           - not_null
       - name: import_germany_belgium
-        description: "Amount of energy imported from Germany and Belgium for the period" (negative means export)"
+        description: "Amount of energy imported from Germany and Belgium for the period (negative means export)"
         data_tests:
           - not_null
 
