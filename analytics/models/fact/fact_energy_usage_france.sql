@@ -21,7 +21,12 @@ SELECT
     SUM(solar) AS usage_solar,
     SUM(hydropower) AS usage_hydropower,
     SUM(pumped_storage) AS usage_pumped_storage,
-    SUM(bioenergy) AS usage_bioenergy
+    SUM(bioenergy) AS usage_bioenergy,
+
+    SUM(import_england) AS import_england,
+    SUM(import_spain) AS import_spain,
+    SUM(import_italy) AS import_italy,
+    SUM(import_germany_belgium) AS import_germany_belgium
 FROM {{ ref('stg_energy_market_france') }}
 WHERE actual IS NOT NULL
 GROUP BY 1

@@ -56,7 +56,24 @@ WITH typed as (
         CASE
             WHEN bio_nergies IN ('', 'ND') THEN 0
             ELSE bio_nergies::NUMERIC
-        END AS bioenergy
+        END AS bioenergy,
+
+        CASE
+            WHEN ech_comm_angleterre IN ('', 'ND') THEN 0
+            ELSE ech_comm_angleterre::NUMERIC
+        END AS import_england,
+        CASE
+            WHEN ech_comm_espagne IN ('', 'ND') THEN 0
+            ELSE ech_comm_espagne::NUMERIC
+        END AS import_spain,
+        CASE
+            WHEN ech_comm_italie IN ('', 'ND') THEN 0
+            ELSE ech_comm_italie::NUMERIC
+        END AS import_italy,
+        CASE
+            WHEN ech_comm_allemagne_belgique IN ('', 'ND') THEN 0
+            ELSE ech_comm_allemagne_belgique::NUMERIC
+        END AS import_germany_belgium
     FROM {{ source('raw_energy', 'raw_energy_market_france') }}
 )
 
