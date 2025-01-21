@@ -5,6 +5,8 @@ toc: false
 # Energy Origin
 
 ```js
+import { timeAxisOptions } from "./utils/formats.js";
+
 const usage = await FileAttachment("data/energy-usage.csv").csv({
   typed: true,
 });
@@ -102,14 +104,7 @@ const plotOrigin = (width, height) =>
     title: "Energy Origin over the Last 30 Days",
     width,
     height: height - 64,
-    // Configure axes
-    x: {
-      tickRotate: -45,
-      label: "",
-      type: "band",
-      tickFormat: "%b %d",
-      nice: true,
-    },
+    x: { ...timeAxisOptions },
     y: {
       grid: true,
       label: "Usage",
@@ -219,27 +214,14 @@ const plotExchange = (width, height) =>
     title: "Energy Exchanges over the Last 30 Days",
     width,
     height: height - 64,
-    // Configure axes
-    x: {
-      tickRotate: -45,
-      label: "",
-      type: "band",
-      tickFormat: "%b %d",
-      nice: true,
-    },
+    x: { ...timeAxisOptions },
     y: {
       grid: true,
       label: "Export",
       tickFormat: ".2s",
     },
     color: {
-      domain: [
-        "England",
-        "Spain",
-        "Italy",
-        "Swiss",
-        "Germany and Belgium",
-      ],
+      domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
       range: d3.schemeTableau10,
       legend: false, // Disable the integrated legend
     },
@@ -258,13 +240,7 @@ const plotExchange = (width, height) =>
   });
 const legendExchanges = Plot.legend({
   color: {
-    domain: [
-        "England",
-        "Spain",
-        "Italy",
-        "Swiss",
-        "Germany and Belgium",
-    ],
+    domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
     range: d3.schemeTableau10,
   },
   label: "Energy Sources",
@@ -272,7 +248,6 @@ const legendExchanges = Plot.legend({
   className: "legendItem",
 });
 ```
-
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex">

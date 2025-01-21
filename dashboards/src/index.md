@@ -7,6 +7,8 @@ toc: false
 </div>
 
 ```js
+import { timeAxisOptions } from "./utils/formats.js";
+
 const usage = FileAttachment("data/energy-usage.csv").csv({ typed: true });
 const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
   typed: true,
@@ -23,13 +25,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
       marginBottom: 64,
       marginLeft: 64,
       marginRight: 64,
-      x: {
-        tickRotate: -45,
-        label: '',
-        type: "band",
-        tickFormat: "%b %d",
-        nice: true,
-      },
+      x: {...timeAxisOptions},
       y: {
         grid: true,
         label: "Energy Usage (MW)",
@@ -89,13 +85,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
       title: "Average Energy Usage Over the Last 30 Days",
       width,
       marginLeft: 64,
-      x: {
-        tickRotate: -45,
-        label: '',
-        type: "band",
-        tickFormat: "%b %d",
-        nice: true,
-      },
+      x: {...timeAxisOptions},
       y: {
         grid: true,
         label: "MW",
@@ -135,4 +125,3 @@ import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";
     ${resize((width, height) => energyUsageHeatmap(usageHeatmap, width, height))}
   </div>
 </div>
-
