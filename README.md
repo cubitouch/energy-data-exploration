@@ -18,8 +18,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 # TODO
 * add charts:
   * total for previous period (new line on first chart), increase/decrease indicator vs previous period
-  * energy source (stacked bar charts?): renewable vs non renewable, per source
-  * carbon impact (`energy_market_france.raw_energy_market_france`: `taux_de_co2` (gram) * `consommation` (MW))
 * add inputs (time periods: last 7 days, last month, last year, custom)
 * Terraform Dbt Cloud
 * Terraform Vercel
