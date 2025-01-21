@@ -22,7 +22,13 @@ const QUERY = `
     SUM(usage_solar) AS usage_solar,
     SUM(usage_hydropower) AS usage_hydropower,
     SUM(usage_pumped_storage) AS usage_pumped_storage,
-    SUM(usage_bioenergy) AS usage_bioenergy
+    SUM(usage_bioenergy) AS usage_bioenergy,
+
+    SUM(import_england) AS import_england,
+    SUM(import_spain) AS import_spain,
+    SUM(import_italy) AS import_italy,
+    SUM(import_swiss) AS import_swiss,
+    SUM(import_germany_belgium) AS import_germany_belgium
   FROM analytics_fact.fact_energy_usage_france
   WHERE timestamp_hour > CURRENT_DATE - INTERVAL '30 days'
   GROUP BY 1

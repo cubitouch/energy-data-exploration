@@ -4,20 +4,21 @@ toc: false
 
 # Energy Origin
 
-
 ```js
-const usage = await FileAttachment("data/energy-usage.csv").csv({ typed: true });
+const usage = await FileAttachment("data/energy-usage.csv").csv({
+  typed: true,
+});
 
 const energyTypeUsage = usage.flatMap((d) => [
   {
     timestamp_date: d.timestamp_date,
     usage: d.usage_renewable,
-    source: "renewable",
+    source: "Renewable",
   },
   {
     timestamp_date: d.timestamp_date,
     usage: d.usage_non_renewable,
-    source: "non_renewable",
+    source: "Non Renewable",
   },
 ]);
 ```
@@ -43,7 +44,7 @@ const energyTypeUsage = usage.flatMap((d) => [
           tickFormat: ".2s",
         },
         color: {
-          domain: ["non_renewable", "renewable"],
+          domain: ["Non Renewable", "Renewable"],
           range: ["#748899", "#ebf9f4"],
         },
         marks: [
@@ -54,7 +55,7 @@ const energyTypeUsage = usage.flatMap((d) => [
               y: "usage",
               fill: "source",
               tip: true,
-              title: d => `${{"renewable": "Renewable", "non_renewable":"Non Renewable"}[d.source]}: ${d3.format(".2s")(d.usage)} MW`
+              title: d => `${d.source}: ${d3.format(".2s")(d.usage)} MW`
             }),
           )
         ]
@@ -96,7 +97,7 @@ const energyOriginUsage = usage.flatMap((d) => [
   },
 ]);
 
-const plot = (width, height) =>
+const plotOrigin = (width, height) =>
   Plot.plot({
     title: "Energy Origin over the Last 30 Days",
     width,
@@ -145,7 +146,7 @@ const plot = (width, height) =>
     ],
   });
 
-const legend = Plot.legend({
+const legendOrigin = Plot.legend({
   color: {
     domain: [
       "Fuel Oil",
@@ -162,7 +163,7 @@ const legend = Plot.legend({
   },
   label: "Energy Sources",
   swatchSize: 16,
-  className: 'legendItem'
+  className: "legendItem",
 });
 ```
 
@@ -170,7 +171,7 @@ const legend = Plot.legend({
   <div class="card" style="display: flex">
     <div style="flex:1;">
       ${
-        resize((width, height) => plot(width, height))
+        resize((width, height) => plotOrigin(width, height))
       }
     </div>
     <style>
@@ -178,7 +179,114 @@ const legend = Plot.legend({
     </style>
     <div style="flex: 0;">
       ${
-        legend
+        legendOrigin
+      }
+    </div>
+  </div>
+</div>
+
+```js
+const energyExchange = usage.flatMap((d) => [
+  {
+    timestamp_date: d.timestamp_date,
+    usage: d.import_england,
+    source: "England",
+  },
+  {
+    timestamp_date: d.timestamp_date,
+    usage: d.import_spain,
+    source: "Spain",
+  },
+  {
+    timestamp_date: d.timestamp_date,
+    usage: d.import_italy,
+    source: "Italy",
+  },
+  {
+    timestamp_date: d.timestamp_date,
+    usage: d.import_swiss,
+    source: "Swiss",
+  },
+  {
+    timestamp_date: d.timestamp_date,
+    usage: d.import_germany_belgium,
+    source: "Germany and Belgium",
+  },
+]);
+
+const plotExchange = (width, height) =>
+  Plot.plot({
+    title: "Energy Exchanges over the Last 30 Days",
+    width,
+    height: height - 64,
+    // Configure axes
+    x: {
+      tickRotate: -45,
+      label: "",
+      type: "band",
+      tickFormat: "%b %d",
+      nice: true,
+    },
+    y: {
+      grid: true,
+      label: "Export",
+      tickFormat: ".2s",
+    },
+    color: {
+      domain: [
+        "England",
+        "Spain",
+        "Italy",
+        "Swiss",
+        "Germany and Belgium",
+      ],
+      range: d3.schemeTableau10,
+      legend: false, // Disable the integrated legend
+    },
+    marks: [
+      Plot.barY(
+        energyExchange,
+        Plot.stackY({
+          x: "timestamp_date",
+          y: "usage",
+          fill: "source",
+          tip: true,
+          title: (d) => `${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+        })
+      ),
+    ],
+  });
+const legendExchanges = Plot.legend({
+  color: {
+    domain: [
+        "England",
+        "Spain",
+        "Italy",
+        "Swiss",
+        "Germany and Belgium",
+    ],
+    range: d3.schemeTableau10,
+  },
+  label: "Energy Sources",
+  swatchSize: 16,
+  className: "legendItem",
+});
+```
+
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex">
+    <div style="flex:1;">
+      ${
+        resize((width, height) => plotExchange(width, height))
+      }
+    </div>
+    <style>
+      .legendItem-swatch { height: 32px;}
+    </style>
+    <div style="flex: 0;">
+      ${
+        legendExchanges
       }
     </div>
   </div>
