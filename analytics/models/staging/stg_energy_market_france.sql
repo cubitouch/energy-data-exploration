@@ -95,8 +95,14 @@ SELECT
     hydropower,
     pumped_storage,
     bioenergy,
+
     -- TODO: move this to intermediate model
     wind + solar + hydropower + pumped_storage + bioenergy as renewable,
-    fuel_oil + coal + gas + nuclear as non_renewable
+    fuel_oil + coal + gas + nuclear as non_renewable,
+
+    import_england,
+    import_spain,
+    import_italy,
+    import_germany_belgium
 FROM typed
 ORDER BY 1
