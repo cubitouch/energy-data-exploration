@@ -34,5 +34,5 @@ jobs:
         run: |
           cd analytics
           dbt deps
-          dbt run --profiles-dir ~/.dbt
+          dbt run --profiles-dir ~/.dbt --full-refresh
           dbt test --profiles-dir ~/.dbt
