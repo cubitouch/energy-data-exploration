@@ -71,6 +71,10 @@ WITH typed as (
             ELSE ech_comm_italie::NUMERIC
         END AS import_italy,
         CASE
+            WHEN ech_comm_suisse IN ('', 'ND') THEN 0
+            ELSE ech_comm_suisse::NUMERIC
+        END AS import_swiss,        
+        CASE
             WHEN ech_comm_allemagne_belgique IN ('', 'ND') THEN 0
             ELSE ech_comm_allemagne_belgique::NUMERIC
         END AS import_germany_belgium
@@ -103,6 +107,7 @@ SELECT
     import_england,
     import_spain,
     import_italy,
+    import_swiss,
     import_germany_belgium
 FROM typed
 ORDER BY 1

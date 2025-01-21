@@ -26,6 +26,7 @@ SELECT
     SUM(import_england) AS import_england,
     SUM(import_spain) AS import_spain,
     SUM(import_italy) AS import_italy,
+    SUM(import_swiss) AS import_swiss,
     SUM(import_germany_belgium) AS import_germany_belgium
 FROM {{ ref('stg_energy_market_france') }}
 WHERE actual IS NOT NULL
