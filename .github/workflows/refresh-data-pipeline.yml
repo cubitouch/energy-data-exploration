@@ -60,7 +60,11 @@ jobs:
   dbt-run:
     uses: ./.github/workflows/run-dbt.yml
     needs: ingest-data
+    secrets:
+      DBT_PROFILES_YML: ${{ secrets.DBT_PROFILES_YML }}
 
   deploy-vercel:
     uses: ./.github/workflows/redeploy-vercel.yml
     needs: dbt-run
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
