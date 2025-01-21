@@ -1,0 +1,36 @@
+name: Run Dbt
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dbt-run:
+    runs-on: ubuntu-latest
+    needs: ingest-data
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dbt Core
+        run: |
+          pip install dbt-core dbt-postgres # Adjust dbt adapter if needed
+          dbt --version
+
+      - name: Set up dbt profiles
+        run: |
+          mkdir -p ~/.dbt
+          echo "$DBT_PROFILES_YML" > ~/.dbt/profiles.yml
+        env:
+          DBT_PROFILES_YML: ${{ secrets.DBT_PROFILES_YML }}
+
+      - name: Run dbt commands
+        run: |
+          cd analytics
+          dbt deps
+          dbt run --profiles-dir ~/.dbt
+          dbt test --profiles-dir ~/.dbt
