@@ -1,6 +1,9 @@
 name: Run Dbt
 
 on:
+  schedule:
+    # Runs every day at 1AM UTC
+    - cron: '0 1 * * *'
   push:
     paths:
       - 'analytics/**'

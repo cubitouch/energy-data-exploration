@@ -19,4 +19,3 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * add inputs (time periods: last 7/30/90 days)
 * Terraform Vercel(?)
 * CICD for Terraform and Lambdas
-* Schedule dbt core without dbt cloud
