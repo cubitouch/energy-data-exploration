@@ -16,8 +16,7 @@ export function energyUsageHeatmap(
         y: "day_of_week",
         fill: "usage",
         tip: true,
-        title: (data) => `${
-          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][data.day_of_week]
+        title: (data) => `${Plot.formatWeekday("en-US", "long")(data.day_of_week)
         } ${data.hour}:00 - ${data.hour + 1}:00
         \nUsage: ${d3.format(".2s")(data.usage)} MW`,
       }),
@@ -42,7 +41,7 @@ export function energyUsageHeatmap(
     },
     y: {
       label: "",
-      tickFormat: (d) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d],
+      tickFormat: (d) => Plot.formatWeekday("en-US", "short")(d),
       domain: [1, 2, 3, 4, 5, 6, 0], // Ensure Monday (1) to Sunday (0) order
       type: "band",
     },
