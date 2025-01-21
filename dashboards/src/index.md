@@ -127,7 +127,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
 </div>
 
 ```js
-import { energyUsageHeatmap } from "./components/energy-usage-heatmap.js";
+import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
