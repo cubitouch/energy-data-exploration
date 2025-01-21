@@ -5,6 +5,7 @@ on:
     paths:
       - 'analytics/**'
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   dbt-run:

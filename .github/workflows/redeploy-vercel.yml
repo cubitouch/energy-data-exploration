@@ -4,7 +4,8 @@ on:
   schedule:
     # Runs every day at 2AM UTC
     - cron: '0 2 * * *'
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   redeploy:
