@@ -29,7 +29,12 @@ export default {
       font-family: "Titillium Web", sans-serif;
     }
     :root {
-      --theme-background-b: rgb(56, 66, 89);
+      --theme-background-b: #384259;
+      --theme-foreground-focus: #cbefe2;
+    }
+    .card {
+      border: none;
+      border-radius: 0;
     }
 
     </style>
