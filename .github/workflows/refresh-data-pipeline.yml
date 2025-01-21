@@ -58,17 +58,9 @@ jobs:
           done
 
   dbt-run:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-dbt.yml
     needs: ingest-data
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: ./.github/workflows/run-dbt.yml
 
   deploy-vercel:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/redeploy-vercel.yml
     needs: dbt-run
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: ./.github/workflows/redeploy-vercel.yml
