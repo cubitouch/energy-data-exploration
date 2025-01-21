@@ -57,41 +57,35 @@ jobs:
             sleep $POLL_INTERVAL
           done
 
-      # Step 3: Trigger dbt Cloud job and wait for completion
-      - name: Trigger dbt Cloud job and wait
-        id: trigger_dbt_job
-        env:
-          DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
+  dbt-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dbt Core
         run: |
-          JOB_ID=70471823414370
-          echo "Triggering dbt Cloud job..."
-          RESPONSE=$(curl -X POST "https://ea043.us1.dbt.com/api/v2/accounts/70471823412077/jobs/$JOB_ID/run/" \
-            -H "Authorization: Bearer $DBT_API_KEY" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "cause": "Triggered by GitHub Action"
-            }')
-          echo "Raw Response: $RESPONSE"
-          RUN_ID=$(echo "$RESPONSE" | jq -r '.data.id')
-          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
-          echo "Triggered dbt job with Run ID: $RUN_ID"
+          pip install dbt-core dbt-postgres # Adjust dbt adapter if needed
+          dbt --version
 
-          echo "Waiting for dbt Cloud job to complete..."
-          STATUS="running"
-          while [[ "$STATUS" == "running" || "$STATUS" == "queued" ]]; do
-            sleep 30
-            STATUS=$(curl -X GET "https://ea043.us1.dbt.com/api/v2/accounts/70471823412077/runs/$RUN_ID/" \
-              -H "Authorization: Bearer $DBT_API_KEY" \
-              -H "Content-Type: application/json" | jq -r '.data.status_humanized' | tr '[:upper:]' '[:lower:]')
-            echo "Current job status: $STATUS"
-          done
+      - name: Set up dbt profiles
+        run: |
+          mkdir -p ~/.dbt
+          echo "$DBT_PROFILES_YML" > ~/.dbt/profiles.yml
+        env:
+          DBT_PROFILES_YML: ${{ secrets.DBT_PROFILES_YML }}
 
-          if [[ "$STATUS" == "success" ]]; then
-            echo "dbt Cloud job completed successfully."
-          else
-            echo "dbt Cloud job failed with status: $STATUS"
-            exit 1
-          fi
+      - name: Run dbt commands
+        run: |
+          cd analytics
+          dbt deps
+          dbt run --profiles-dir ~/.dbt
+          dbt test --profiles-dir ~/.dbt
 
       # Step 4: Redeploy Vercel deployment
       - name: Redeploy on Vercel
@@ -103,7 +97,7 @@ jobs:
           DEPLOYMENTS=$(curl -X GET "https://api.vercel.com/v6/deployments?app=$PROJECT_ID" \
             -H "Authorization: Bearer $VERCEL_TOKEN" \
             -H "Content-Type: application/json")
-          
+
           echo "Deployments: $DEPLOYMENTS"
 
           DEPLOYMENT_ID=$(echo "$DEPLOYMENTS" | jq -r '.deployments[0].uid')
