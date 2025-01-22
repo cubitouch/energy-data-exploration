@@ -32,9 +32,15 @@ export default {
       --theme-background-b: #384259;
       --theme-foreground-focus: #cbefe2;
     }
+    button, input, textarea {
+        accent-color: var(--theme-foreground-focus);
+    }
     .card {
       border: none;
       border-radius: 0;
+    }
+    .observablehq--block label {
+      line-height: 0.8rem;
     }
 
     </style>
