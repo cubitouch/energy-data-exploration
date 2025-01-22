@@ -9,7 +9,7 @@ export function energyUsageHeatmap(
   return Plot.plot({
     width,
     height: height - 32,
-    title: "Energy Usage Over the Week Last Month",
+    title: "Energy Usage Over the Week",
     marks: [
       Plot.cell(usageHeatmap, {
         x: "hour",

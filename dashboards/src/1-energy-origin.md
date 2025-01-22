@@ -29,7 +29,7 @@ const energyTypeUsage = usage.flatMap((d) => [
   <div class="card">
     ${
       resize((width, height) => Plot.plot({
-        title: "Energy Origin Type over the Last 30 Days",
+        title: "Energy Origin Type",
         width,
         height: height - 64,
         // Configure axes
@@ -101,7 +101,7 @@ const energyOriginUsage = usage.flatMap((d) => [
 
 const plotOrigin = (width, height) =>
   Plot.plot({
-    title: "Energy Origin over the Last 30 Days",
+    title: "Energy Origin",
     width,
     height: height - 64,
     x: { ...timeAxisOptions },
@@ -211,13 +211,13 @@ const energyExchange = usage.flatMap((d) => [
 
 const plotExchange = (width, height) =>
   Plot.plot({
-    title: "Energy Exchanges over the Last 30 Days",
+    title: "Energy Exchanges",
     width,
     height: height - 64,
     x: { ...timeAxisOptions },
     y: {
       grid: true,
-      label: "Export",
+      label: "Import",
       tickFormat: ".2s",
     },
     color: {

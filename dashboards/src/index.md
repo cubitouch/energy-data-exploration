@@ -19,7 +19,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
   <div class="card">
   ${
     resize((width, height) => Plot.plot({
-      title: "Energy Usage and Carbon Impact over the Last 30 Days",
+      title: "Energy Usage and Carbon Impact",
       width, 
       height: height - 32,
       marginBottom: 64,
@@ -28,7 +28,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
       x: {...timeAxisOptions},
       y: {
         grid: true,
-        label: "Energy Usage (MW)",
+        label: "Energy (MW)",
         domain: d3.extent(usage, d => d.usage),
         tickFormat: ".2s",
         nice: true,
@@ -54,7 +54,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
           },
           y: {
             type: "linear",
-            label: "Co2 Impact (g)",
+            label: "Co2 (g)",
             tickFormat: ".2s",
             axis: "right",
             line: true,
@@ -82,7 +82,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
   <div class="card">
   ${
     resize((width) => Plot.plot({
-      title: "Average Energy Usage Over the Last 30 Days",
+      title: "Average Energy Usage",
       width,
       marginLeft: 64,
       x: {...timeAxisOptions},
