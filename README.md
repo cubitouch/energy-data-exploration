@@ -16,5 +16,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * Vercel - 2AM UTC
 
 # TODO
+* add chart to represent the difference between the estimations and the actual (explain why coal energy origin raises sometimes?)
 * Terraform Vercel(?)
 * CICD for Terraform and Lambdas
