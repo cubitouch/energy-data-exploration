@@ -16,6 +16,5 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * Vercel - 2AM UTC
 
 # TODO
-* add inputs (time periods: last 7/30/90 days)
 * Terraform Vercel(?)
 * CICD for Terraform and Lambdas
