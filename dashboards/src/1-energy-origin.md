@@ -6,25 +6,31 @@ toc: false
 
 ```js
 const timePeriod = view(
-  Inputs.radio(["7 days", "30 days", "90 days"], {
-    label: "Time Period",
-    value: "7 days",
-  })
+  Inputs.radio(
+    new Map([
+      ["7 days", 7],
+      ["30 days", 30],
+      ["90 days", 90],
+    ]),
+    {
+      label: "Time Period",
+      value: 7,
+    }
+  )
 );
 ```
 
 ```js
 import { timeAxisOptions } from "./utils/formats.js";
 
-
 const usagePerPeriod = {
-  "7 days": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
+  "7": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
     typed: true,
   }),
-  "30 days": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
+  "30": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
     typed: true,
   }),
-  "90 days": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
+  "90": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
     typed: true,
   }),
 };
@@ -52,13 +58,7 @@ const energyTypeUsage = usage.flatMap((d) => [
         width,
         height: height - 64,
         // Configure axes
-        x: {
-          tickRotate: -45,
-          label: '',
-          type: "band",
-          tickFormat: "%b %d",
-          nice: true,
-        },
+        x: {...timeAxisOptions(timePeriod)},
         y: {
           grid: true,
           label: "Usage",
@@ -124,7 +124,7 @@ const plotOrigin = (width, height) =>
     title: "Energy Origin",
     width,
     height: height - 64,
-    x: { ...timeAxisOptions },
+    x: { ...timeAxisOptions(timePeriod) },
     y: {
       grid: true,
       label: "Usage",
@@ -156,7 +156,9 @@ const plotOrigin = (width, height) =>
         stroke: "source", // Differentiates lines by source
         strokeWidth: 2, // Adjust line thickness
         tip: true,
-        title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+        title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(
+          new Date(d.timestamp_date)
+        )}
               \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
       }),
     ],
@@ -235,7 +237,7 @@ const plotExchange = (width, height) =>
     title: "Energy Exchanges",
     width,
     height: height - 64,
-    x: { ...timeAxisOptions },
+    x: { ...timeAxisOptions(timePeriod) },
     y: {
       grid: true,
       label: "Import",
@@ -254,7 +256,9 @@ const plotExchange = (width, height) =>
           y: "usage",
           fill: "source",
           tip: true,
-          title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+          title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(
+            new Date(d.timestamp_date)
+          )}
               \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
         })
       ),

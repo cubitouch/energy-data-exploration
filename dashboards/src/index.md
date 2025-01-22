@@ -8,10 +8,17 @@ toc: false
 
 ```js
 const timePeriod = view(
-  Inputs.radio(["7 days", "30 days", "90 days"], {
-    label: "Time Period",
-    value: "7 days",
-  })
+  Inputs.radio(
+    new Map([
+      ["7 days", 7],
+      ["30 days", 30],
+      ["90 days", 90],
+    ]),
+    {
+      label: "Time Period",
+      value: 7,
+    }
+  )
 );
 ```
 
@@ -19,13 +26,13 @@ const timePeriod = view(
 import { timeAxisOptions } from "./utils/formats.js";
 
 const usagePerPeriod = {
-  "7 days": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
+  "7": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
     typed: true,
   }),
-  "30 days": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
+  "30": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
     typed: true,
   }),
-  "90 days": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
+  "90": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
     typed: true,
   }),
 };
@@ -45,7 +52,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
       marginBottom: 64,
       marginLeft: 64,
       marginRight: 64,
-      x: {...timeAxisOptions},
+      x: {...timeAxisOptions(timePeriod)},
       y: {
         grid: true,
         label: "Energy (MW)",
@@ -105,7 +112,7 @@ const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
       title: "Average Energy Usage",
       width,
       marginLeft: 64,
-      x: {...timeAxisOptions},
+      x: {...timeAxisOptions(timePeriod)},
       y: {
         grid: true,
         label: "MW",
