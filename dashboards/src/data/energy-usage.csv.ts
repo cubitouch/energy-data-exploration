@@ -30,7 +30,8 @@ const QUERY = `
     SUM(import_swiss) AS import_swiss,
     SUM(import_germany_belgium) AS import_germany_belgium
   FROM analytics_fact.fact_energy_usage_france
-  WHERE timestamp_hour > CURRENT_DATE - INTERVAL '30 days'
+  WHERE timestamp_hour < CURRENT_DATE
+  AND timestamp_hour > CURRENT_DATE - INTERVAL '30 days'
   GROUP BY 1
   ORDER BY 1
 `;
