@@ -26,20 +26,30 @@ const timePeriod = view(
 import { timeAxisOptions } from "./utils/formats.js";
 
 const usagePerPeriod = {
-  "7": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
+  7: await FileAttachment(`data/energy-usage/7-days.csv`).csv({
     typed: true,
   }),
-  "30": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
+  30: await FileAttachment(`data/energy-usage/30-days.csv`).csv({
     typed: true,
   }),
-  "90": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
+  90: await FileAttachment(`data/energy-usage/90-days.csv`).csv({
     typed: true,
   }),
 };
 const usage = usagePerPeriod[timePeriod];
-const usageHeatmap = FileAttachment("data/energy-usage-heatmap.csv").csv({
-  typed: true,
-});
+
+const usageHeatmapPerPeriod = {
+  7: await FileAttachment(`data/energy-usage-heatmap/7-days.csv`).csv({
+    typed: true,
+  }),
+  30: await FileAttachment(`data/energy-usage-heatmap/30-days.csv`).csv({
+    typed: true,
+  }),
+  90: await FileAttachment(`data/energy-usage-heatmap/90-days.csv`).csv({
+    typed: true,
+  }),
+};
+const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
