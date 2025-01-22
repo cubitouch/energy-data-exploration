@@ -76,7 +76,8 @@ const energyTypeUsage = usage.flatMap((d) => [
               y: "usage",
               fill: "source",
               tip: true,
-              title: d => `${d.source}: ${d3.format(".2s")(d.usage)} MW`
+              title: d => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+              \n${d.source}: ${d3.format(".2s")(d.usage)} MW`
             }),
           )
         ]
@@ -155,7 +156,8 @@ const plotOrigin = (width, height) =>
         stroke: "source", // Differentiates lines by source
         strokeWidth: 2, // Adjust line thickness
         tip: true,
-        title: (d) => `${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+        title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+              \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
       }),
     ],
   });
@@ -252,7 +254,8 @@ const plotExchange = (width, height) =>
           y: "usage",
           fill: "source",
           tip: true,
-          title: (d) => `${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+          title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))}
+              \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
         })
       ),
     ],
