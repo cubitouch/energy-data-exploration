@@ -1,6 +1,4 @@
-import { safeFetchData } from "../utils/data_loader.js";
-
-const QUERY = `
+export const getQuery = (days: number) => `
   SELECT
     DATE_TRUNC('day', timestamp_hour) as timestamp_date,
 
@@ -31,9 +29,7 @@ const QUERY = `
     SUM(import_germany_belgium) AS import_germany_belgium
   FROM analytics_fact.fact_energy_usage_france
   WHERE timestamp_hour < CURRENT_DATE
-  AND timestamp_hour > CURRENT_DATE - INTERVAL '30 days'
+  AND timestamp_hour > CURRENT_DATE - INTERVAL '${days} days'
   GROUP BY 1
   ORDER BY 1
 `;
-
-(async () => safeFetchData(QUERY))();

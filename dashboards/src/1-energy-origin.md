@@ -5,11 +5,30 @@ toc: false
 # Energy Origin
 
 ```js
+const timePeriod = view(
+  Inputs.radio(["7 days", "30 days", "90 days"], {
+    label: "Time Period",
+    value: "7 days",
+  })
+);
+```
+
+```js
 import { timeAxisOptions } from "./utils/formats.js";
 
-const usage = await FileAttachment("data/energy-usage.csv").csv({
-  typed: true,
-});
+
+const usagePerPeriod = {
+  "7 days": await FileAttachment(`data/energy-usage/7-days.csv`).csv({
+    typed: true,
+  }),
+  "30 days": await FileAttachment(`data/energy-usage/30-days.csv`).csv({
+    typed: true,
+  }),
+  "90 days": await FileAttachment(`data/energy-usage/90-days.csv`).csv({
+    typed: true,
+  }),
+};
+const usage = usagePerPeriod[timePeriod];
 
 const energyTypeUsage = usage.flatMap((d) => [
   {
