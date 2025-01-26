@@ -9,7 +9,7 @@ const DSN = process.env.DATABASE_URL;
 assert(!!DSN);
 const { Client } = pkg;
 
-export async function fetchData(dsn, query) {
+async function fetchData(dsn, query) {
   const client = new Client({
     connectionString: dsn,
     ssl: {
