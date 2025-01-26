@@ -43,14 +43,10 @@ const [plot, legend] = useEnergyTypeBreakdown(timePeriod, usage);
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex">
     <div style="flex:1;">
-      ${
-        resize((width, height) => plot(width, height))
-      }
+      ${resize((width, height) => plot(width, height))}
     </div>
     <div style="flex: 0;">
-      ${
-        legend
-      }
+      ${legend}
     </div>
   </div>
 </div>
@@ -63,14 +59,10 @@ const [plotOrigin, legendOrigin] = useEnergyOriginBreakdown(timePeriod, usage);
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex">
     <div style="flex:1;">
-      ${
-        resize((width, height) => plotOrigin(width, height))
-      }
+      ${resize((width, height) => plotOrigin(width, height))}
     </div>
     <div style="flex: 0;">
-      ${
-        legendOrigin
-      }
+      ${legendOrigin}
     </div>
   </div>
 </div>
@@ -83,14 +75,10 @@ const [plotExchange, legendExchange] = useExchangeBreakdown(timePeriod, usage);
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex">
     <div style="flex:1;">
-      ${
-        resize((width, height) => plotExchange(width, height))
-      }
+      ${resize((width, height) => plotExchange(width, height))}
     </div>
     <div style="flex: 0;">
-      ${
-        legendExchange
-      }
+      ${legendExchange}
     </div>
   </div>
 </div>
