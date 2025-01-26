@@ -115,5 +115,5 @@ export const useEnergyOriginBreakdown = (
     className: "legendItem",
   });
 
-  return [plotOrigin, legendOrigin];
+  return [plotOrigin, legendOrigin] as const;
 };

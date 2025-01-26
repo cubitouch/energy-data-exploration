@@ -70,5 +70,5 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
       ],
     });
 
-  return [plot];
+  return [plot] as const;
 };

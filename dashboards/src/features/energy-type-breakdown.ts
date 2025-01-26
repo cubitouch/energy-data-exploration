@@ -67,5 +67,5 @@ export const useEnergyTypeBreakdown = (
     className: "legendItem",
   });
 
-  return [plot, legend];
+  return [plot, legend] as const;
 };
