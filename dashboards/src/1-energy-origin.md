@@ -21,8 +21,6 @@ const timePeriod = view(
 ```
 
 ```js
-import { timeAxisOptions } from "./utils/formats.js";
-
 const usagePerPeriod = {
   7: await FileAttachment(`data/energy-usage/7-days.csv`).csv({
     typed: true,
