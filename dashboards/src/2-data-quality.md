@@ -39,6 +39,7 @@ const dataQuality = FileAttachment("data/data-quality.csv").csv({
               x: (d) => d3.utcWeek.count(d3.utcYear(d.timestamp_date), d.timestamp_date),
               y: (d) => d.timestamp_date.getUTCDay(),
               fill: (d) => d.count == 96 ? "#748899" : "#cbefe2",
+              tip: true,
               title: (d) => `${d3.timeFormat("%d %b %Y")(new Date(d.timestamp_date))} - ${d.count}/96 datapoints`,
               inset: 0.5,
             }),
