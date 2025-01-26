@@ -2,7 +2,12 @@ import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import { timeAxisOptions } from "../utils/formats.js";
 
-export const useUsageVsCarbon = (timePeriod: number, usage: any[]) => {
+interface EnergyUsage {
+  timestamp_date: string;
+  usage: number;
+  co2_impact: number;
+}
+export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
   const plot = (width: number, height: number) =>
     Plot.plot({
       title: "Energy Usage and Carbon Impact",
@@ -15,13 +20,13 @@ export const useUsageVsCarbon = (timePeriod: number, usage: any[]) => {
       y: {
         grid: true,
         label: "Energy (MW)",
-        domain: d3.extent(usage, (d) => d.usage),
+        domain: d3.extent(data, (d: EnergyUsage) => d.usage),
         tickFormat: ".2s",
         nice: true,
       },
       marks: [
-        Plot.lineY(usage, { x: "timestamp_date", y: "usage" }),
-        Plot.dot(usage, {
+        Plot.lineY(data, { x: "timestamp_date", y: "usage" }),
+        Plot.dot(data, {
           x: "timestamp_date",
           y: "usage",
           fill: "white",
@@ -48,13 +53,13 @@ export const useUsageVsCarbon = (timePeriod: number, usage: any[]) => {
               nice: true,
             },
             marks: [
-              Plot.barY(usage, {
+              Plot.barY(data, {
                 x: "timestamp_date",
                 y: "co2_impact",
                 fill: "#cbefe2",
                 opacity: 0.5,
                 tip: true,
-                title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(
+                title: (d: EnergyUsage) => `Date: ${d3.timeFormat("%d %b %Y")(
                   new Date(d.timestamp_date)
                 )}
             \nImpact: ${d3.format(".2s")(d.co2_impact)} g

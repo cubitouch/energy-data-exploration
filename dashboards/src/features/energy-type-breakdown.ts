@@ -2,8 +2,16 @@ import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import { timeAxisOptions } from "../utils/formats.js";
 
-export const useEnergyTypeBreakdown = (timePeriod: number, usage: any[]) => {
-  const energyTypeUsage = usage.flatMap((d) => [
+interface EnergyUsage {
+  timestamp_date: string;
+  usage_renewable: number;
+  usage_non_renewable: number;
+}
+export const useEnergyTypeBreakdown = (
+  timePeriod: number,
+  data: EnergyUsage[]
+) => {
+  const energyTypeUsage = data.flatMap((d) => [
     {
       timestamp_date: d.timestamp_date,
       usage: d.usage_renewable,
@@ -40,9 +48,9 @@ export const useEnergyTypeBreakdown = (timePeriod: number, usage: any[]) => {
             y: "usage",
             fill: "source",
             tip: true,
-            title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(
-              new Date(d.timestamp_date)
-            )}
+            title: (d: (typeof energyTypeUsage)[0]) => `Date: ${d3.timeFormat(
+              "%d %b %Y"
+            )(new Date(d.timestamp_date))}
           \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
           })
         ),

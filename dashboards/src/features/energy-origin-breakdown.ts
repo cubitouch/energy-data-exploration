@@ -2,8 +2,23 @@ import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import { timeAxisOptions } from "../utils/formats.js";
 
-export const useEnergyOriginBreakdown = (timePeriod: number, usage: any[]) => {
-  const energyOriginUsage = usage.flatMap((d) => [
+interface EnergyUsage {
+  timestamp_date: string;
+  usage_fuel_oil: number;
+  usage_coal: number;
+  usage_gas: number;
+  usage_nuclear: number;
+  usage_wind: number;
+  usage_solar: number;
+  usage_hydropower: number;
+  usage_pumped_storage: number;
+  usage_bioenergy: number;
+}
+export const useEnergyOriginBreakdown = (
+  timePeriod: number,
+  data: EnergyUsage[]
+) => {
+  const energyOriginUsage = data.flatMap((d) => [
     {
       timestamp_date: d.timestamp_date,
       usage: d.usage_fuel_oil,
@@ -72,9 +87,9 @@ export const useEnergyOriginBreakdown = (timePeriod: number, usage: any[]) => {
           stroke: "source", // Differentiates lines by source
           strokeWidth: 2, // Adjust line thickness
           tip: true,
-          title: (d) => `Date: ${d3.timeFormat("%d %b %Y")(
-            new Date(d.timestamp_date)
-          )}
+          title: (d: (typeof energyOriginUsage)[0]) => `Date: ${d3.timeFormat(
+            "%d %b %Y"
+          )(new Date(d.timestamp_date))}
                     \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
         }),
       ],

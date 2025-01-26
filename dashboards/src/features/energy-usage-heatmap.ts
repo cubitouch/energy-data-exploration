@@ -1,8 +1,13 @@
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 
+interface EnergyUsageOverWeek {
+  hour: number;
+  day_of_week: number;
+  usage: number;
+}
 export function energyUsageHeatmap(
-  usageHeatmap: any[],
+  data: EnergyUsageOverWeek[],
   width: number,
   height: number
 ) {
@@ -11,14 +16,16 @@ export function energyUsageHeatmap(
     height: height - 32,
     title: "Energy Usage Over the Week",
     marks: [
-      Plot.cell(usageHeatmap, {
+      Plot.cell(data, {
         x: "hour",
         y: "day_of_week",
         fill: "usage",
         tip: true,
-        title: (data) => `${Plot.formatWeekday("en-US", "long")(data.day_of_week)
-        } ${data.hour}:00 - ${data.hour + 1}:00
-        \nUsage: ${d3.format(".2s")(data.usage)} MW`,
+        title: (d: EnergyUsageOverWeek) => `${Plot.formatWeekday(
+          "en-US",
+          "long"
+        )(d.day_of_week)} ${d.hour}:00 - ${d.hour + 1}:00
+        \nUsage: ${d3.format(".2s")(d.usage)} MW`,
       }),
     ],
     color: {
@@ -36,7 +43,7 @@ export function energyUsageHeatmap(
     x: {
       label: "",
       tickFormat: (d) => `${d}:00`, // Format hours as "0:00", "1:00", etc.
-      domain: [...Array(24).keys()], // Ensure hours are ordered from 0 to 23
+      domain: Array.from(Array(24).keys()), // Ensure hours are ordered from 0 to 23
       type: "band",
     },
     y: {
