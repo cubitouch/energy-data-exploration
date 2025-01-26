@@ -42,6 +42,9 @@ export default {
     .observablehq--block label {
       line-height: 0.8rem;
     }
+    .legendItem-swatch {
+      height: 32px;
+    }
 
     </style>
   `,

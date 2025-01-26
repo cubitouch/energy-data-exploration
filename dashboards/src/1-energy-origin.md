@@ -192,9 +192,6 @@ const legendOrigin = Plot.legend({
         resize((width, height) => plotOrigin(width, height))
       }
     </div>
-    <style>
-      .legendItem-swatch { height: 32px;}
-    </style>
     <div style="flex: 0;">
       ${
         legendOrigin
@@ -282,9 +279,6 @@ const legendExchanges = Plot.legend({
         resize((width, height) => plotExchange(width, height))
       }
     </div>
-    <style>
-      .legendItem-swatch { height: 32px;}
-    </style>
     <div style="flex: 0;">
       ${
         legendExchanges
