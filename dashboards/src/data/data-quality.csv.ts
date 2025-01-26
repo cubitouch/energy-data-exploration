@@ -1,4 +1,4 @@
-import { safeFetchData } from "../utils/data_loader.js";
+import { safeFetchData } from "../utils/data-loader.js";
 
 const QUERY = `
   SELECT
