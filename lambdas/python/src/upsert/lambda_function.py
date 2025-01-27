@@ -60,20 +60,6 @@ def ingest_to_database(data):
     response = ssm.get_parameter(Name="/energy-market-france/db-dsn", WithDecryption=True)
     database_dsn = response["Parameter"]["Value"]
 
-    # Save the DataFrame to a CSV file in /tmp
-    # we do this to avoid having to install too many dependencies (dlt[parquet]) into the lambda package
-    csv_file_path = "/tmp/energy_market_france.csv"
-    data.to_csv(csv_file_path, index=False)
-    print(f"Data saved to CSV at {csv_file_path}")
-
-    # Define a function to yield rows from the CSV
-    def csv_generator(file_path):
-        with open(file_path, mode="r", encoding="ISO-8859-1") as csv_file:
-            reader = csv.DictReader(csv_file)
-            rows = list(reader)
-            for row in rows[:-3]:  # Skip the last row
-                yield row
-
     # Initialize DLT pipeline
     dlt_pipeline = dlt.pipeline(
         destination=dlt.destinations.postgres(database_dsn),
@@ -82,7 +68,7 @@ def ingest_to_database(data):
 
     # Use the generator as a resource
     resource = dlt.resource(
-        csv_generator(csv_file_path),
+        data,
         name="raw_energy_market_france",
         primary_key=("date", "heures"),
         merge_key=("date", "heures", "consommation")
