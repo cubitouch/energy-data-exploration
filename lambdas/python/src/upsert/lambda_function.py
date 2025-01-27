@@ -55,7 +55,8 @@ def lambda_handler(event, context):
         encoding="ISO-8859-1", 
         usecols=range(40),
         # cleanup the last rows as they don't match the csv format
-        skipfooter=3,  # Adjust this number to the rows you want to skip
+        engine="python",
+        skipfooter=2,  # Adjust this number to the rows you want to skip
     )
     print(data.head())  # Print the first few rows for debugging
     print(data.tail())  # Print the last few rows for debugging
