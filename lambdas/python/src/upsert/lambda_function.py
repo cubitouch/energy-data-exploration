@@ -12,7 +12,7 @@ s3 = boto3.client("s3")
 ssm = boto3.client("ssm")
 
 def lambda_handler(event, context):
-    if event is not None:
+    if event is not None and "Records" in event:
         # Get the bucket name and object key from the event
         bucket_name = event["Records"][0]["s3"]["bucket"]["name"]
         object_key = event["Records"][0]["s3"]["object"]["key"]
@@ -27,7 +27,7 @@ def lambda_handler(event, context):
         s3.download_file(bucket_name, decoded_object_key, zip_file_path)
     else:
         # TODO: retrieve the most recent file in S3?
-        zip_file_path = "/tmp/2025-01-04T16_41_46.338Z.zip"
+        zip_file_path = "./2025-01-05T01_28_08.403Z.zip"
 
     # Extract the .xls file from the ZIP
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
