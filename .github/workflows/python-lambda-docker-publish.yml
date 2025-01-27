@@ -29,7 +29,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: lambdas/python
         push: true
         tags: |
           ghcr.io/${{ github.repository_owner }}/lambda-upsert:latest
