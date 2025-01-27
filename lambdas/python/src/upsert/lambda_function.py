@@ -49,11 +49,16 @@ def lambda_handler(event, context):
 
     # Load the file into a Pandas DataFrame
     # here we enforce 40 columns because the file might be malformed which shifts the cells by 1
-    data = pd.read_csv(extracted_xls_path, sep="\t", encoding="ISO-8859-1", usecols=range(40))
+    data = pd.read_csv(
+        extracted_xls_path, 
+        sep="\t", 
+        encoding="ISO-8859-1", 
+        usecols=range(40),
+        # cleanup the last rows as they don't match the csv format
+        skipfooter=3,  # Adjust this number to the rows you want to skip
+    )
     print(data.head())  # Print the first few rows for debugging
-
-    # cleanup the last rows as they don't match the csv format
-    data = data.iloc[:-3]
+    print(data.tail())  # Print the last few rows for debugging
     
     # Use DLT to ingest the data into the database
     ingest_to_database(data)
