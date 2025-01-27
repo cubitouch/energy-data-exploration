@@ -6,6 +6,7 @@ import dlt
 import os
 import csv
 import pprint
+import tempfile
 
 # Initialize S3 and SSM clients
 s3 = boto3.client("s3")
@@ -47,10 +48,24 @@ def lambda_handler(event, context):
 
     print(f"Extracted XLS file: {extracted_xls_path}")
 
+    print(f"Cleaning end of line tabs...")
+    # Create a temporary file to store the cleaned data
+    cleaned_file_path = tempfile.NamedTemporaryFile(delete=False).name
+    # Open the original file and the temporary file
+    with open(extracted_xls_path, "r", encoding="ISO-8859-1") as infile, open(cleaned_file_path, "w", encoding="ISO-8859-1") as outfile:
+        for line in infile:
+            # Remove trailing tabs and any extra whitespace at the end of the line
+            cleaned_line = line.rstrip("\t").rstrip()
+            # Write the cleaned line to the new file
+            outfile.write(cleaned_line + "\n")
+
+    # Now the cleaned file is saved at `cleaned_file_path`
+    print(f"Cleaned file saved at: {cleaned_file_path}")
+
     # Load the file into a Pandas DataFrame
     # here we enforce 40 columns because the file might be malformed which shifts the cells by 1
     data = pd.read_csv(
-        extracted_xls_path, 
+        cleaned_file_path, 
         sep="\t", 
         encoding="ISO-8859-1", 
         usecols=range(40),
@@ -74,6 +89,9 @@ def ingest_to_database(data):
         destination=dlt.destinations.postgres(database_dsn),
         dataset_name="energy_market_france"
     )
+
+    # Replace null (NaN) values in the 'consommation' column with 0
+    data["Consommation"] = data["Consommation"].fillna(0)
 
     # Use the generator as a resource
     resource = dlt.resource(
