@@ -4,6 +4,8 @@ SELECT
     date_trunc('hour', t) AS timestamp_hour,
 
     SUM(actual) AS usage,
+    SUM(estimated_d1) AS usage_estimated_d1,
+    SUM(estimated_d) AS usage_estimated_d,
     MIN(actual) AS usage_min,
     MAX(actual) AS usage_max,
     AVG(actual) AS usage_average,

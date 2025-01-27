@@ -13,6 +13,14 @@ models:
         description: "The effective energy consumption for the period"
         data_tests:
           - not_null
+      - name: usage_estimated_d1
+        description: "The estimated (at D-1) energy consumption for the period"
+        data_tests:
+          - not_null
+      - name: usage_estimated_d
+        description: "The estimated (at D) energy consumption for the period"
+        data_tests:
+          - not_null
       - name: usage_min
         description: "The minimum energy consumption for the period"
         data_tests:
