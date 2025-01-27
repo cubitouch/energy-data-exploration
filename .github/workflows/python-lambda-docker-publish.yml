@@ -32,4 +32,4 @@ jobs:
         context: lambdas/python
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/lambda-upsert:latest
+          ghcr.io/${{ github.repository }}/lambda-upsert:latest
