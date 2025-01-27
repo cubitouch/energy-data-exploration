@@ -3,7 +3,7 @@ toc: false
 ---
 
 <div>
-  <h1>Energy Market France</h1>
+  <h1>Overview</h1>
 </div>
 
 ```js
@@ -23,8 +23,6 @@ const timePeriod = view(
 ```
 
 ```js
-import { timeAxisOptions } from "./utils/formats.js";
-
 const usagePerPeriod = {
   7: await FileAttachment(`data/energy-usage/7-days.csv`).csv({
     typed: true,
@@ -47,16 +45,6 @@ const [plotUsage] = useUsageVsCarbon(timePeriod, usage);
   </div>
 </div>
 
-```js
-import { useUsageAverage } from "./features/usage-average.js";
-const [plotUsageAverage] = useUsageAverage(timePeriod, usage);
-```
-
-<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card">
-    ${resize((width) => plotUsageAverage(width))}
-  </div>
-</div>
 
 ```js
 import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";

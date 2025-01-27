@@ -3,6 +3,8 @@ export const getQuery = (days: number) => `
     DATE_TRUNC('day', timestamp_hour) as timestamp_date,
 
     SUM(usage) as usage,
+    SUM(usage_estimated_d1) as usage_estimated_d1,
+    SUM(usage_estimated_d) as usage_estimated_d,
     MIN(usage_min) as usage_min,
     MAX(usage_max) as usage_max,
     AVG(usage_average) as usage_average,
