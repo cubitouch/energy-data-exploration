@@ -16,7 +16,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
-* add chart to represent the difference between the estimations and the actual (explain why coal energy origin sometimes?)
 * make legend filters
 * merge stacked items individual tooltips into 1, make it generic/reusable
 * migrate python lambda to docker image
