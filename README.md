@@ -18,6 +18,5 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 # TODO
 * make legend filters
 * merge stacked items individual tooltips into 1, make it generic/reusable
-* migrate python lambda to docker image
 * Terraform Vercel(?)
 * CICD for Terraform and Lambdas
