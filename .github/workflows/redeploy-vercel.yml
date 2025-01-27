@@ -3,7 +3,7 @@ name: Redeploy to Vercel
 on:
   schedule:
     # Runs every day at 2AM UTC
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
   workflow_dispatch:
   workflow_call:
     secrets:
@@ -27,7 +27,7 @@ jobs:
           DEPLOYMENTS=$(curl -s -X GET "https://api.vercel.com/v6/deployments?app=$PROJECT_ID" \
             -H "Authorization: Bearer $VERCEL_TOKEN" \
             -H "Content-Type: application/json")
-          
+
           echo "Deployments: $DEPLOYMENTS"
 
           DEPLOYMENT_ID=$(echo "$DEPLOYMENTS" | jq -r '.deployments[0].uid')
