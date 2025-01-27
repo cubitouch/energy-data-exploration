@@ -39,5 +39,5 @@ jobs:
       - name: Update Lambda Function
         run: |
           aws lambda update-function-code \
-            --function-name energy-market-france-upsert-docker \
+            --function-name energy-market-france-upsert \
             --image-uri $ECR_REGISTRY/$ECR_REPOSITORY:latest
