@@ -1,10 +1,3 @@
-# layers
-resource "aws_lambda_layer_version" "pandas_layer" {
-  filename          = "${path.module}/../lambdas/python/dist/pandas-layer.zip"
-  layer_name        = "pandas-layer"
-  compatible_runtimes = ["python3.9"]
-}
-
 # s3 storage
 resource "aws_s3_bucket" "ingest_bucket" {
   bucket = "energy-market-france"
@@ -140,19 +133,21 @@ resource "aws_iam_role_policy_attachment" "lambda_insights_attach" {
 }
 
 resource "aws_lambda_function" "upsert" {
-  filename         = "${path.module}/../lambdas/python/dist/upsert.zip"
   function_name    = "energy-market-france-upsert"
   role             = aws_iam_role.upsert_lambda_role.arn
-  handler          = "src/upsert/lambda_function.lambda_handler"
-  runtime          = "python3.9"
-  source_code_hash = filebase64sha256("${path.module}/../lambdas/python/dist/upsert.zip")
+  package_type     = "Image"
+  image_uri        = "${aws_ecr_repository.lambda_upsert_repo.repository_url}:latest"
 
   memory_size      = 512  # Increase to load files into pandas dataframe
   timeout          = 600 # Set timeout in seconds (maximum: 900 seconds)
-  layers           = [
-    aws_lambda_layer_version.pandas_layer.arn,
-    "arn:aws:lambda:eu-north-1:580247275435:layer:LambdaInsightsExtension:14"
-  ]
+  publish          = true # updates the function when new image is published
+  
+  # Ensure CloudWatch Lambda Insights layer for container support is added if needed
+  environment {
+    variables = {
+      LOG_LEVEL = "DEBUG" # Example variable
+    }
+  }
 }
 
 resource "aws_s3_bucket_notification" "ingest_bucket_notifications" {
