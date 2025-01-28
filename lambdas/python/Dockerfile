@@ -1,6 +1,11 @@
 # Use the official AWS Lambda Python 3.9 base image
 FROM public.ecr.aws/lambda/python:3.9
 
+# extra lines to install the agent here
+RUN curl -O https://lambda-insights-extension.s3-ap-northeast-1.amazonaws.com/amazon_linux/lambda-insights-extension.rpm && \
+    rpm -U lambda-insights-extension.rpm && \
+    rm -f lambda-insights-extension.rpm
+
 # Set the working directory inside the container
 WORKDIR /var/task
 
