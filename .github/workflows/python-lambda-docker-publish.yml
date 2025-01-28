@@ -38,3 +38,6 @@ jobs:
           aws lambda update-function-code \
             --function-name energy-market-france-upsert \
             --image-uri $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          aws lambda update-function-code \
+            --function-name energy-market-france-ingest-energy-reports \
+            --image-uri $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
