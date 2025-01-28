@@ -26,7 +26,7 @@ WITH typed as (
         ech_comm_espagne::NUMERIC AS import_spain,
         ech_comm_italie::NUMERIC AS import_italy,
         ech_comm_suisse::NUMERIC AS import_swiss,        
-        ech_comm_allemagne_belgique::NUMERIC yAS import_germany_belgium
+        ech_comm_allemagne_belgique::NUMERIC AS import_germany_belgium
     FROM {{ source('raw_energy', 'raw_energy_market_france') }}
 )
 
