@@ -16,7 +16,9 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
-* make legend filters
-* merge stacked items individual tooltips into 1, make it generic/reusable
+* add notes and info to support charts / data origin
+* use ChartJS instead of Observable.Plot?
+  * clickable legend filtering
+  * single tooltip regardles of series count
 * Terraform Vercel(?)
-* CICD for Terraform and Lambdas
+* CICD for Terraform and (Node) Lambda
