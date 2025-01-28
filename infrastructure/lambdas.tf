@@ -229,7 +229,7 @@ resource "aws_lambda_function" "ingest_energy_reports" {
   package_type     = "Image"
   image_uri        = "${aws_ecr_repository.lambda_upsert_repo.repository_url}:latest"
 
-  memory_size      = 512  # Increase to load files into pandas dataframe
+  memory_size      = 1024  # Increase to load files into pandas dataframe
   timeout          = 600 # Set timeout in seconds (maximum: 900 seconds)
   publish          = true # updates the function when new image is published
   
