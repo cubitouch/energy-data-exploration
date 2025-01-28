@@ -127,7 +127,7 @@ resource "aws_iam_role_policy_attachment" "upsert_lambda_attach" {
   policy_arn = aws_iam_policy.lambda_upsert_policy.arn
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_insights_attach" {
+resource "aws_iam_role_policy_attachment" "lambda_insights_attach_upsert" {
   role       = aws_iam_role.upsert_lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy"
 }
@@ -216,6 +216,11 @@ resource "aws_iam_policy" "lambda_ingest_energy_reports_policy" {
 resource "aws_iam_role_policy_attachment" "ingest_energy_reports_lambda_attach" {
   role       = aws_iam_role.ingest_energy_reports_lambda_role.name
   policy_arn = aws_iam_policy.lambda_ingest_energy_reports_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_insights_attach_ingest_energy_reports" {
+  role       = aws_iam_role.ingest_energy_reports_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy"
 }
 
 resource "aws_lambda_function" "ingest_energy_reports" {
