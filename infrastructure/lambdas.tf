@@ -142,6 +142,11 @@ resource "aws_lambda_function" "upsert" {
   timeout          = 600 # Set timeout in seconds (maximum: 900 seconds)
   publish          = true # updates the function when new image is published
   
+  # Override the default handler with the specific handler for this Lambda
+  image_config {
+    command = ["upsert.lambda_function.lambda_handler"]
+  }
+  
   # Ensure CloudWatch Lambda Insights layer for container support is added if needed
   environment {
     variables = {
