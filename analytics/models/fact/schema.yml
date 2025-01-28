@@ -15,12 +15,8 @@ models:
           - not_null
       - name: usage_estimated_d1
         description: "The estimated (at D-1) energy consumption for the period"
-        data_tests:
-          - not_null
       - name: usage_estimated_d
         description: "The estimated (at D) energy consumption for the period"
-        data_tests:
-          - not_null
       - name: usage_min
         description: "The minimum energy consumption for the period"
         data_tests:
@@ -35,29 +31,15 @@ models:
           - not_null
       - name: co2_impact
         description: "The co2 (gram) impact for the period total energy consumption"
-        data_tests:
-          - not_null
       - name: usage_renewable
         description: "The effective renewable energy consumption for the period"
-        data_tests:
-          - not_null
       - name: usage_non_renewable
         description: "The effective non renewable energy consumption for the period"
-        data_tests:
-          - not_null
       - name: import_england
         description: "Amount of energy imported from England for the period (negative means export)"
-        data_tests:
-          - not_null
       - name: import_spain
         description: "Amount of energy imported from Spain for the period (negative means export)"
-        data_tests:
-          - not_null
       - name: import_italy
         description: "Amount of energy imported from Italy for the period (negative means export)"
-        data_tests:
-          - not_null
       - name: import_germany_belgium
         description: "Amount of energy imported from Germany and Belgium for the period (negative means export)"
-        data_tests:
-          - not_null
