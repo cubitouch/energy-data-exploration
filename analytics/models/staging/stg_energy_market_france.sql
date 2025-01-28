@@ -4,7 +4,10 @@ WITH typed as (
     SELECT
         TO_TIMESTAMP(date || ' ' || heures, 'YYYY-MM-DD HH24:MI') AS t,
         consommation::NUMERIC AS actual,
-        pr_vision_j_1::NUMERIC AS estimated_d1,
+        CASE
+            WHEN pr_vision_j_1 IN ('', 'ND') THEN NULL
+            ELSE pr_vision_j_1::NUMERIC
+        END AS estimated_d1,
         pr_vision_j::NUMERIC AS estimated_d,
 
         taux_de_co2::NUMERIC AS co2_ratio,
@@ -23,7 +26,7 @@ WITH typed as (
         ech_comm_espagne::NUMERIC AS import_spain,
         ech_comm_italie::NUMERIC AS import_italy,
         ech_comm_suisse::NUMERIC AS import_swiss,        
-        ech_comm_allemagne_belgique::NUMERIC AS import_germany_belgium
+        ech_comm_allemagne_belgique::NUMERIC yAS import_germany_belgium
     FROM {{ source('raw_energy', 'raw_energy_market_france') }}
 )
 
