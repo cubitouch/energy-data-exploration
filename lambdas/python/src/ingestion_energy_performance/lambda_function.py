@@ -24,7 +24,6 @@ def energy_reports_source():
                 "type": "json_link",
                 "next_url_path": "next",
             },
-            "session": {}
         },
         "resource_defaults": {
             "primary_key": "N°DPE",
