@@ -3,10 +3,7 @@
 WITH typed as (
     SELECT
         TO_TIMESTAMP(date || ' ' || heures, 'YYYY-MM-DD HH24:MI') AS t,
-        CASE
-            WHEN consommation IN ('', 'ND') THEN NULL
-            ELSE consommation::NUMERIC
-        END AS actual,
+        consommation::NUMERIC AS actual,
         CASE
             WHEN pr_vision_j_1 IN ('', 'ND') THEN NULL
             ELSE pr_vision_j_1::NUMERIC
