@@ -5,7 +5,7 @@ FROM public.ecr.aws/lambda/python:3.9
 WORKDIR /var/task
 
 # Copy your function code into the container
-COPY ./src/upsert/lambda_function.py ./
+COPY ./src ./
 
 # For local testing
 COPY ./2025-01-05T01_28_08.403Z.zip 2025-01-05T01_28_08.403Z.zip
@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt --target /var/task
 
 # Specify the handler function to run when the Lambda is invoked
 # The format is "<filename>.<handler>"
-CMD ["lambda_function.lambda_handler"]
+CMD ["upsert.lambda_function.lambda_handler"]
