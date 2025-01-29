@@ -44,8 +44,27 @@ const [plotUsage] = useUsageVsCarbon(timePeriod, usage);
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card">
-    ${resize((width, height) => plotUsage(width, height))}
+
+  <div class="card" style="display: flex">
+    <div style="flex:1;">
+      ${resize((width, height) => plotUsage(width, height))}
+    </div>
+    <div style="flex: 0;">
+      <div style="display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="24" height="12">
+            <line x1="0" y1="6" x2="24" y2="6" stroke="#fff" stroke-width="2" />
+          </svg>
+          <span>Usage</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="24" height="16">
+            <rect width="100%" height="100%" fill="#748899" />
+          </svg>
+          <span>Carbon Impact</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="note">
@@ -55,7 +74,7 @@ Energy usage doesn't entirely corelate with carbon impact.
 </div>
 
 ```js
-import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";
+import { useEnergyUsageHeatmap } from "./features/energy-usage-heatmap.js";
 const usageHeatmapPerPeriod = {
   7: await FileAttachment(`data/energy-usage-heatmap/7-days.csv`).csv({
     typed: true,
@@ -68,11 +87,18 @@ const usageHeatmapPerPeriod = {
   }),
 };
 const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
+const [plotUsageHeatmap, legendUsageHeatmap] = useEnergyUsageHeatmap(usageHeatmap);
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card">
-    ${resize((width, height) => energyUsageHeatmap(usageHeatmap, width, height))}
+    ${resize((width, height) => {
+      const container = html`<div style="display: flex; align-items: center; flex-direction: column"></div>`;
+      const plot = plotUsageHeatmap(width, height);
+      const legend = legendUsageHeatmap;
+      container.append(plot, legend);
+      return container;
+    })}
   </div>
 </div>
 <div class="note">

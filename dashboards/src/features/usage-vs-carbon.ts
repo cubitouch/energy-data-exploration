@@ -47,6 +47,7 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
               axis: "right",
               line: true,
               nice: true,
+              labelOffset: 48,
             },
             marks: [
               Plot.barY(data, {

@@ -45,8 +45,26 @@ const [plotUsageAverage] = useUsageAverage(timePeriod, usage);
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card">
-    ${resize((width) => plotUsageAverage(width))}
+  <div class="card" style="display: flex">
+    <div style="flex:1;">
+      ${resize((width) => plotUsageAverage(width))}
+    </div>
+    <div style="flex: 0;">
+      <div style="display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="24" height="12">
+            <line x1="0" y1="6" x2="24" y2="6" stroke="#fff" stroke-width="2" />
+          </svg>
+          <span>Average</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="24" height="16">
+            <rect width="100%" height="100%" fill="#748899" />
+          </svg>
+          <span>Range</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="note">
