@@ -69,7 +69,7 @@ const [plotUsageAverage] = useUsageAverage(timePeriod, usage);
 </div>
 <div class="note">
 
-The above chart shows average, minimum and maximum of MW consumed **within any given 15 minutes** window that day.
+The above chart shows the average, minimum, and maximum megawatts (MW) consumed **within any given 15-minute** window that day.
 
 </div>
 
@@ -112,7 +112,7 @@ const [plotUsageEstimates, legendUsageEstimates] = useUsageEstimates(
 </div>
 <div class="note">
 
-**Hypothesis**: The D-1 estimates are used to arrange import/export of energy?
+**Hypothesis**: Are the D-1 estimates used to arrange the import/export of energy?
 
-**Hypothesis**: The D estimates are always(?) slightly higher than the effective usage to cater for possible spikes?
+**Hypothesis**: Are the D estimates always slightly higher than the actual usage to account for possible spikes?
 </div>
