@@ -36,6 +36,14 @@ export default {
     button, input, textarea {
         accent-color: var(--theme-foreground-focus);
     }
+    footer nav {
+      display: flex !important;
+      justify-content: space-between;
+      max-width: none !important;
+    }
+    footer nav a {
+      border-radius: 0 !important;
+    }
     .grid {
       gap: 2rem;
     }
