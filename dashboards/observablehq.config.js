@@ -29,11 +29,15 @@ export default {
       font-family: "Titillium Web", sans-serif;
     }
     :root {
-      --theme-background-b: #384259;
+      --theme-background-b: #282f40;
+      --theme-background-a:rgb(36, 43, 58);
       --theme-foreground-focus: #cbefe2;
     }
     button, input, textarea {
         accent-color: var(--theme-foreground-focus);
+    }
+    .grid {
+      gap: 2rem;
     }
     .card {
       border: none;
@@ -44,6 +48,9 @@ export default {
     }
     .legendItem-swatch {
       height: 32px;
+    }
+    h2 {
+      margin-bottom: 1rem;
     }
 
     </style>

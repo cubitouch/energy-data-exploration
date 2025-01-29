@@ -4,6 +4,8 @@ toc: false
 
 # Energy Origin
 
+<div class="grid grid-cols-1">
+
 ```js
 const timePeriod = view(
   Inputs.radio(
@@ -19,6 +21,8 @@ const timePeriod = view(
   )
 );
 ```
+
+</div>
 
 ```js
 const usagePerPeriod = {

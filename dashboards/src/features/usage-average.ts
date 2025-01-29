@@ -27,8 +27,7 @@ export const useUsageAverage = (timePeriod: number, data: EnergyUsage[]) => {
           x: "timestamp_date",
           y1: "usage_min",
           y2: "usage_max",
-          fill: "#cbefe2",
-          opacity: 0.5,
+          fill: "#728698",
         }),
         Plot.lineY(data, { x: "timestamp_date", y: "usage_average" }),
         Plot.dot(data, {

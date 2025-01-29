@@ -6,6 +6,8 @@ toc: false
   <h1>Overview</h1>
 </div>
 
+<div class="grid grid-cols-1">
+
 ```js
 const timePeriod = view(
   Inputs.radio(
@@ -21,6 +23,8 @@ const timePeriod = view(
   )
 );
 ```
+
+</div>
 
 ```js
 const usagePerPeriod = {
@@ -44,7 +48,6 @@ const [plotUsage] = useUsageVsCarbon(timePeriod, usage);
     ${resize((width, height) => plotUsage(width, height))}
   </div>
 </div>
-
 
 ```js
 import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";

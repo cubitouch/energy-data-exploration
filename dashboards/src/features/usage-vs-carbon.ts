@@ -13,9 +13,10 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
       title: "Energy Usage and Carbon Impact",
       width,
       height: height - 32,
-      marginBottom: 64,
-      marginLeft: 64,
+      marginTop: 32,
+      marginLeft: 48,
       marginRight: 64,
+      marginBottom: 64,
       x: { ...timeAxisOptions(timePeriod) },
       y: {
         grid: true,
@@ -25,18 +26,13 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
         nice: true,
       },
       marks: [
-        Plot.lineY(data, { x: "timestamp_date", y: "usage" }),
-        Plot.dot(data, {
-          x: "timestamp_date",
-          y: "usage",
-          fill: "white",
-        }),
         (() =>
           Plot.plot({
             // dimensions
-            marginBottom: 64,
-            marginLeft: 64,
+            marginTop: 32,
+            marginLeft: 48,
             marginRight: 64,
+            marginBottom: 64,
             width,
             height: height - 32,
             x: {
@@ -56,8 +52,7 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
               Plot.barY(data, {
                 x: "timestamp_date",
                 y: "co2_impact",
-                fill: "#cbefe2",
-                opacity: 0.5,
+                fill: "#728698",
                 tip: true,
                 title: (d: EnergyUsage) => `Date: ${d3.timeFormat("%d %b %Y")(
                   new Date(d.timestamp_date)
@@ -67,6 +62,12 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
               }),
             ],
           })) as Plot.Markish,
+        Plot.lineY(data, { x: "timestamp_date", y: "usage" }),
+        Plot.dot(data, {
+          x: "timestamp_date",
+          y: "usage",
+          fill: "white",
+        }),
       ],
     });
 
