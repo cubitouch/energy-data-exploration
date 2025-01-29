@@ -101,6 +101,7 @@ const [plotExchange, legendExchange] = useExchangeBreakdown(timePeriod, usage);
 </div>
 
 <div class="note">
+
 Negative values on this chart represent exports rather than imports.
 
 At the time of writing, this clearly indicates that France is a strong energy exporter.

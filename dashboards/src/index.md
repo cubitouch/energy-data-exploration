@@ -68,6 +68,7 @@ const [plotUsage] = useUsageVsCarbon(timePeriod, usage);
   </div>
 </div>
 <div class="note">
+
 Energy usage doesn't entirely correlate with carbon impact.
 
 **Hypothesis**: This correlation could be represented through energy origin (renewable, coal, etc)?
