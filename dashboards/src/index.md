@@ -76,6 +76,9 @@ const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
   </div>
 </div>
 <div class="note">
+
+The above chart uses the **average usage during a given hour** - i.e. given 2 slots for the same week day and hour, respectively representing a total of 1 MW and 2 MW usage: the chart will represent an 1.5 MW average.
+
 At time of writting, this chart shows pretty clearly Saturdays and Sundays are less active. The same is usually true from midnight to 6AM.
 
 **Hypothesis**: Correlation of energy usage with meteorological data (e.g. temperature) could explain why some days would not follow expected patterns (e.g. a Sunday being much colder than usual during the period, triggering more heaters to be on).
