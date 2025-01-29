@@ -55,7 +55,7 @@ export const useExchangeBreakdown = (
       },
       color: {
         domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
-        range: d3.schemeTableau10,
+        range: d3.schemeSet2,
         legend: false, // Disable the integrated legend
       },
       marks: [
@@ -77,7 +77,7 @@ export const useExchangeBreakdown = (
   const legendExchanges = Plot.legend({
     color: {
       domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
-      range: d3.schemeTableau10,
+      range: d3.schemeSet2,
     },
     label: "Energy Sources",
     swatchSize: 16,
