@@ -16,6 +16,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 * Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
+* document/explain the data source (origin, frequency, time span, etc)
 * Excalidraw the hell ouf of the architecture
 * use ChartJS instead of Observable.Plot?
   * clickable legend filtering
