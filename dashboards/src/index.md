@@ -18,7 +18,7 @@ const timePeriod = view(
     ]),
     {
       label: "Time Period",
-      value: 7,
+      value: 30,
     }
   )
 );
@@ -48,6 +48,11 @@ const [plotUsage] = useUsageVsCarbon(timePeriod, usage);
     ${resize((width, height) => plotUsage(width, height))}
   </div>
 </div>
+<div class="note">
+Energy usage doesn't entirely corelate with carbon impact.
+
+**Hypothesis**: This correlation could be represented through energy origin (renewable, coal, etc)?
+</div>
 
 ```js
 import { energyUsageHeatmap } from "./features/energy-usage-heatmap.js";
@@ -69,4 +74,9 @@ const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
   <div class="card">
     ${resize((width, height) => energyUsageHeatmap(usageHeatmap, width, height))}
   </div>
+</div>
+<div class="note">
+At time of writting, this chart shows pretty clearly Saturdays and Sundays are less active. The same is usually true from midnight to 6AM.
+
+**Hypothesis**: Correlation of energy usage with meteorological data (e.g. temperature) could explain why some days would not follow expected patterns (e.g. a Sunday being much colder than usual during the period, triggering more heaters to be on).
 </div>

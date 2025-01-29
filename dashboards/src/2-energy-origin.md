@@ -16,7 +16,7 @@ const timePeriod = view(
     ]),
     {
       label: "Time Period",
-      value: 7,
+      value: 30,
     }
   )
 );
@@ -53,6 +53,12 @@ const [plot, legend] = useEnergyTypeBreakdown(timePeriod, usage);
   </div>
 </div>
 
+<div class="note">
+
+**Hypothesis**: This page would benefit from additionnal charts to represent [green and clean](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy) energy usage.
+
+</div>
+
 ```js
 import { useEnergyOriginBreakdown } from "./features/energy-origin-breakdown.js";
 const [plotOrigin, legendOrigin] = useEnergyOriginBreakdown(timePeriod, usage);
@@ -69,6 +75,15 @@ const [plotOrigin, legendOrigin] = useEnergyOriginBreakdown(timePeriod, usage);
   </div>
 </div>
 
+<div class="warning">
+Given most French energy is Nuclear, the scale here is logarithmic to facilitate reading trend changes.
+</div>
+<div class="note">
+
+Coal based energy production is only activated in the event of [energy usage peaks](https://www.latribune.fr/entreprises-finance/industrie/energie-environnement/france-deux-centrales-a-charbon-autorisees-a-fonctionner-jusqu-a-fin-2024-973788.html).
+
+</div>
+
 ```js
 import { useExchangeBreakdown } from "./features/exchange-breakdown.js";
 const [plotExchange, legendExchange] = useExchangeBreakdown(timePeriod, usage);
@@ -83,4 +98,10 @@ const [plotExchange, legendExchange] = useExchangeBreakdown(timePeriod, usage);
       ${legendExchange}
     </div>
   </div>
+</div>
+
+<div class="note">
+Negative values on this chart represent export rather than import.
+
+At time of writting, this is clear evidence France is a strong energy exporter.
 </div>

@@ -16,7 +16,7 @@ const timePeriod = view(
     ]),
     {
       label: "Time Period",
-      value: 7,
+      value: 30,
     }
   )
 );
@@ -48,6 +48,11 @@ const [plotUsageAverage] = useUsageAverage(timePeriod, usage);
   <div class="card">
     ${resize((width) => plotUsageAverage(width))}
   </div>
+</div>
+<div class="note">
+
+The above chart shows average, minimum and maximum of MW consumed **within any given 15 minutes** window that day.
+
 </div>
 
 ```js
@@ -86,4 +91,10 @@ const [plotUsageEstimates, legendUsageEstimates] = useUsageEstimates(
       </div>
     </div>
   </div>
+</div>
+<div class="note">
+
+**Hypothesis**: The D-1 estimates are used to arrange import/export of energy?
+
+**Hypothesis**: The D estimates are always(?) slightly higher than the effective usage to cater for possible spikes?
 </div>
