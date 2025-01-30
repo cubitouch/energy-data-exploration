@@ -51,7 +51,7 @@ export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
         type: "band",
       },
     });
-  const legend = plot(0, 0).legend("color", {
+  const legend = plot(0, 84).legend("color", {
     tickFormat: "2s",
   });
 
