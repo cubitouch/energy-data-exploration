@@ -76,7 +76,7 @@ const [plotOrigin, legendOrigin] = useEnergyOriginBreakdown(timePeriod, usage);
 </div>
 
 <div class="warning">
-Given that most French energy is nuclear, the scale here is logarithmic to facilitate reading trend changes.
+Given that most French energy is nuclear, the scale here is square root to facilitate reading trend changes.
 </div>
 <div class="note">
 
