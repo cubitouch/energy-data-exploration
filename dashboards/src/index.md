@@ -14,7 +14,7 @@ This app is an exploratory work-in-progress using French energy and climate open
 
 ### Energy Market France
 
-The data published [here](https://ecologie.data.gouv.fr/datasets/55f0463d88ee3849f5a46ec1) includes, among other things:
+The national level data published [here](https://ecologie.data.gouv.fr/datasets/55f0463d88ee3849f5a46ec1) includes, among other things:
 
 - Energy usage and estimates (D and D-1)
 - Usage breakdown by energy type (coal, wind, solar, etc.)
