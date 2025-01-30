@@ -1,20 +1,23 @@
 // See https://observablehq.com/framework/config for documentation.
 export default {
   // The app’s title; used in the sidebar and webpage titles.
-  title: "Energy Market France",
+  title: "Energy Data Exploration",
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
   // lets you organize them into sections and have unlisted pages.
-  // pages: [
-  //   {
-  //     name: "Examples",
-  //     pages: [
-  //       {name: "Dashboard", path: "/example-dashboard"},
-  //       {name: "Report", path: "/example-report"}
-  //     ]
-  //   }
-  // ],
+  pages: [
+    {
+      name: "Energy Market France",
+      pages: [
+        { name: "Exploration", path: "/energy-market-france" },
+        { name: "Usage", path: "/energy-usage" },
+        { name: "Origin", path: "/energy-origin" },
+        { name: "Data Quality", path: "/data-quality" },
+      ],
+    },
+    { name: "About", path: "/about" },
+  ],
 
   // Content to add to the head of the page, e.g. for a favicon:
   head: `
@@ -33,6 +36,11 @@ export default {
       --theme-background-a:rgb(36, 43, 58);
       --theme-foreground-focus: #cbefe2;
     }
+
+    h2 + p, h3 + p, h4 + p, h2 + table, h3 + table, h4 + table  {
+      margin-bottom: 32px;
+    }
+
     button, input, textarea {
         accent-color: var(--theme-foreground-focus);
     }

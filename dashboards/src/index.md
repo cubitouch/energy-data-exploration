@@ -2,101 +2,24 @@
 toc: false
 ---
 
-<div>
-  <h1>Overview</h1>
-</div>
+# Overview
 
-<div class="grid grid-cols-1 time-picker">
+---
 
-```js
-const timePeriod = view(
-  Inputs.radio(
-    new Map([
-      ["7 days", 7],
-      ["30 days", 30],
-      ["90 days", 90],
-    ]),
-    {
-      label: "Time Period",
-      value: 30,
-    }
-  )
-);
-```
+## Preamble
 
-</div>
+This app is a work in progress exploratory work using French energy and climate open data.
 
-```js
-const usagePerPeriod = {
-  7: await FileAttachment(`data/energy-usage/7-days.csv`).csv({
-    typed: true,
-  }),
-  30: await FileAttachment(`data/energy-usage/30-days.csv`).csv({
-    typed: true,
-  }),
-  90: await FileAttachment(`data/energy-usage/90-days.csv`).csv({
-    typed: true,
-  }),
-};
-const usage = usagePerPeriod[timePeriod];
-import { useUsageVsCarbon } from "./features/usage-vs-carbon.js";
-const [plotUsage, legendUsage] = useUsageVsCarbon(timePeriod, usage);
-```
+## Data sources
 
-<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+### Energy Market France
 
-  <div class="card" style="display: flex; flex-direction: column;">
-    <div style="flex:1;">
-      ${resize((width, height) => plotUsage(width, height))}
-    </div>
-    <div>
-      ${legendUsage}
-    </div>
-  </div>
-</div>
-<div class="note">
+Data published [here](https://ecologie.data.gouv.fr/datasets/55f0463d88ee3849f5a46ec1) contains, among other things:
 
-Energy usage doesn't entirely correlate with carbon impact.
+- energy usage
+- estimates (D and D-1)
+- usage breakdown per energy type (coal, wind, solar, ...)
+- corresponding co2 ratio
+- country origin of said energy
 
-**Hypothesis**: This correlation could be represented through energy origin (renewable, coal, etc)?
-
-</div>
-
-```js
-import { useEnergyUsageHeatmap } from "./features/energy-usage-heatmap.js";
-const usageHeatmapPerPeriod = {
-  7: await FileAttachment(`data/energy-usage-heatmap/7-days.csv`).csv({
-    typed: true,
-  }),
-  30: await FileAttachment(`data/energy-usage-heatmap/30-days.csv`).csv({
-    typed: true,
-  }),
-  90: await FileAttachment(`data/energy-usage-heatmap/90-days.csv`).csv({
-    typed: true,
-  }),
-};
-const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
-const [plotUsageHeatmap, legendUsageHeatmap] =
-  useEnergyUsageHeatmap(usageHeatmap);
-```
-
-<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card">
-    ${resize((width, height) => {
-      const container = html`<div style="display: flex; align-items: center; flex-direction: column"></div>`;
-      const plot = plotUsageHeatmap(width, height);
-      const legend = legendUsageHeatmap;
-      container.append(plot, legend);
-      return container;
-    })}
-  </div>
-</div>
-<div class="note">
-
-The above chart displays the **average usage during a given hour**. For example, if there are two slots for the same weekday and hour, representing 1 MW and 2 MW usage respectively, the chart will show a 1.5 MW average.
-
-At the time of writing, this chart clearly shows that Saturdays and Sundays are less active. The same is usually true from midnight to 6AM.
-
-**Hypothesis**: Correlation of energy usage with meteorological data (e.g. temperature) could explain why some days would not follow expected patterns (e.g. a Sunday being much colder than usual during the period, triggering more heaters to be on).
-
-</div>
+The data is represented using 15-minute data points and spans since early 2023. New data is available throughout the day but this dashboard is refreshed only every night.
