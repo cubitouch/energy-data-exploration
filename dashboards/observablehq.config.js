@@ -54,11 +54,22 @@ export default {
     .observablehq--block label {
       line-height: 0.8rem;
     }
-    .legendItem-swatch {
-      height: 32px;
-    }
     h2 {
       margin-bottom: 1rem;
+    }
+
+    .legendItem-swatches-wrap {
+      display: flex;
+      font-family: sans-serif;
+      font-size: 10px;
+    }
+    .legendItem-swatch {
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+    :where(.legendItem-swatch > svg) {
+      margin-right: 0.5em;
     }
 
     </style>

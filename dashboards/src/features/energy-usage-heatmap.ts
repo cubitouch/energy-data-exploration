@@ -11,6 +11,7 @@ export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
     Plot.plot({
       width,
       height: height - 84,
+      marginBottom: 32,
       title: "Energy Usage Over the Week",
       marks: [
         Plot.cell(data, {
@@ -35,7 +36,7 @@ export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
             .interpolate(d3.interpolateRgb),
           20
         ), // Use RGB interpolation
-        label: "Average Usage (MW)",
+        label: "Average (MW)",
       },
       x: {
         label: "",

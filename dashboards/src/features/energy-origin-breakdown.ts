@@ -50,52 +50,17 @@ export const useEnergyOriginBreakdown = (
     },
   ]);
 
-  const plotOrigin = (width, height) =>
-    Plot.plot({
-      title: "Energy Origin",
-      width,
-      height: height - 64,
-      x: { ...timeAxisOptions(timePeriod) },
-      y: {
-        grid: true,
-        label: "Usage",
-        tickFormat: ".2s",
-        nice: true,
-        type: "sqrt",
-      },
-      // Define color scale for all sources
-      color: {
-        domain: [
-          "Fuel Oil",
-          "Coal",
-          "Gas",
-          "Nuclear",
-          "Wind",
-          "Solar",
-          "Hydropower",
-          "Pumped Storage",
-          "Bioenergy",
-        ],
-        range: d3.schemeSet2,
-        legend: false, // Disable the integrated legend
-      },
-      // Add the line marks
-      marks: [
-        Plot.line(energyOriginUsage, {
-          x: "timestamp_date",
-          y: "usage",
-          stroke: "source", // Differentiates lines by source
-          strokeWidth: 2, // Adjust line thickness
-          tip: true,
-          title: (d: (typeof energyOriginUsage)[0]) => `Date: ${d3.timeFormat(
-            "%d %b %Y"
-          )(new Date(d.timestamp_date))}
-                    \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
-        }),
-      ],
-    });
-
-  const legendOrigin = Plot.legend({
+  const options: Plot.PlotOptions = {
+    title: "Energy Origin",
+    x: { ...timeAxisOptions(timePeriod) },
+    y: {
+      grid: true,
+      label: "Usage",
+      tickFormat: ".2s",
+      nice: true,
+      type: "sqrt",
+    },
+    // Define color scale for all sources
     color: {
       domain: [
         "Fuel Oil",
@@ -110,10 +75,30 @@ export const useEnergyOriginBreakdown = (
       ],
       range: d3.schemeSet2,
     },
-    label: "Energy Sources",
+    marks: [
+      Plot.line(energyOriginUsage, {
+        x: "timestamp_date",
+        y: "usage",
+        stroke: "source",
+        strokeWidth: 2,
+        tip: true,
+        title: (d: (typeof energyOriginUsage)[0]) => `Date: ${d3.timeFormat(
+          "%d %b %Y"
+        )(new Date(d.timestamp_date))}
+                  \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+      }),
+    ],
+  };
+
+  const plot = (width, height) =>
+    Plot.plot({ ...options, width, height: height - 64 });
+
+  const legend = Plot.legend({
+    color: options.color,
     swatchSize: 16,
     className: "legendItem",
+    width: 90,
   });
 
-  return [plotOrigin, legendOrigin] as const;
+  return [plot, legend] as const;
 };

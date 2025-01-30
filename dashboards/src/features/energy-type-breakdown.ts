@@ -24,47 +24,43 @@ export const useEnergyTypeBreakdown = (
     },
   ]);
 
-  const plot = (width, height) =>
-    Plot.plot({
-      title: "Energy Origin Type",
-      width,
-      height: height - 64,
-      // Configure axes
-      x: { ...timeAxisOptions(timePeriod) },
-      y: {
-        grid: true,
-        label: "Usage",
-        tickFormat: ".2s",
-      },
-      color: {
-        domain: ["Non Renewable", "Renewable"],
-        range: ["#748899", "#ebf9f4"],
-      },
-      marks: [
-        Plot.barY(
-          energyTypeUsage,
-          Plot.stackY({
-            x: "timestamp_date",
-            y: "usage",
-            fill: "source",
-            tip: true,
-            title: (d: (typeof energyTypeUsage)[0]) => `Date: ${d3.timeFormat(
-              "%d %b %Y"
-            )(new Date(d.timestamp_date))}
-          \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
-          })
-        ),
-      ],
-    });
-
-  const legend = Plot.legend({
+  const options: Plot.PlotOptions = {
+    title: "Energy Origin Type",
+    x: { ...timeAxisOptions(timePeriod) },
+    y: {
+      grid: true,
+      label: "Usage",
+      tickFormat: ".2s",
+    },
     color: {
       domain: ["Non Renewable", "Renewable"],
       range: ["#748899", "#ebf9f4"],
     },
-    label: "Energy Sources",
+    marks: [
+      Plot.barY(
+        energyTypeUsage,
+        Plot.stackY({
+          x: "timestamp_date",
+          y: "usage",
+          fill: "source",
+          tip: true,
+          title: (d: (typeof energyTypeUsage)[0]) => `Date: ${d3.timeFormat(
+            "%d %b %Y"
+          )(new Date(d.timestamp_date))}
+        \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+        })
+      ),
+    ],
+  };
+
+  const plot = (width, height) =>
+    Plot.plot({ ...options, width, height: height - 64 });
+
+  const legend = Plot.legend({
+    color: options.color,
     swatchSize: 16,
     className: "legendItem",
+    width: 90,
   });
 
   return [plot, legend] as const;

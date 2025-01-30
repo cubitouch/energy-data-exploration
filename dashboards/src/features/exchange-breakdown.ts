@@ -42,47 +42,44 @@ export const useExchangeBreakdown = (
     },
   ]);
 
-  const plotExchange = (width, height) =>
-    Plot.plot({
-      title: "Energy Exchanges",
-      width,
-      height: height - 64,
-      x: { ...timeAxisOptions(timePeriod) },
-      y: {
-        grid: true,
-        label: "Import",
-        tickFormat: ".2s",
-      },
-      color: {
-        domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
-        range: d3.schemeSet2,
-        legend: false, // Disable the integrated legend
-      },
-      marks: [
-        Plot.barY(
-          energyExchange,
-          Plot.stackY({
-            x: "timestamp_date",
-            y: "usage",
-            fill: "source",
-            tip: true,
-            title: (d: (typeof energyExchange)[0]) => `Date: ${d3.timeFormat(
-              "%d %b %Y"
-            )(new Date(d.timestamp_date))}
-                \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
-          })
-        ),
-      ],
-    });
-  const legendExchanges = Plot.legend({
+  const options: Plot.PlotOptions = {
+    title: "Energy Exchanges",
+    x: { ...timeAxisOptions(timePeriod) },
+    y: {
+      grid: true,
+      label: "Import",
+      tickFormat: ".2s",
+    },
     color: {
       domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],
       range: d3.schemeSet2,
     },
-    label: "Energy Sources",
+    marks: [
+      Plot.barY(
+        energyExchange,
+        Plot.stackY({
+          x: "timestamp_date",
+          y: "usage",
+          fill: "source",
+          tip: true,
+          title: (d: (typeof energyExchange)[0]) => `Date: ${d3.timeFormat(
+            "%d %b %Y"
+          )(new Date(d.timestamp_date))}
+              \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
+        })
+      ),
+    ],
+  };
+
+  const plot = (width, height) =>
+    Plot.plot({ ...options, width, height: height - 64 });
+
+  const legend = Plot.legend({
+    color: options.color,
     swatchSize: 16,
     className: "legendItem",
+    width: 90,
   });
 
-  return [plotExchange, legendExchanges] as const;
+  return [plot, legend] as const;
 };

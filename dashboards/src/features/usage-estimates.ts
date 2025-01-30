@@ -1,5 +1,6 @@
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
+import { html } from "npm:htl";
 import { timeAxisOptions } from "../utils/formats.js";
 
 interface EnergyUsage {
@@ -13,6 +14,7 @@ export const useUsageEstimates = (timePeriod: number, data: EnergyUsage[]) => {
     Plot.plot({
       title: "Estimated Energy Usage",
       width,
+      height: height - 48,
       marginLeft: 64,
       x: { ...timeAxisOptions(timePeriod) },
       y: {
@@ -48,5 +50,37 @@ export const useUsageEstimates = (timePeriod: number, data: EnergyUsage[]) => {
       ],
     });
 
-  return [plot] as const;
+  const legend = html`<div
+    class="legendItem-swatches-wrap"
+    style="gap: 32px; justify-content: center;"
+  >
+    <div class="legendItem-swatch">
+      <svg width="16" height="12">
+        <line x1="0" y1="6" x2="16" y2="6" stroke="#748899" stroke-width="2" />
+      </svg>
+      Estimated (D-1)
+    </div>
+    <div class="legendItem-swatch">
+      <svg width="16" height="12">
+        <line
+          x1="0"
+          y1="6"
+          x2="16"
+          y2="6"
+          stroke="#cbefe2"
+          stroke-width="2"
+          stroke-dasharray="4"
+        />
+      </svg>
+      Estimated (D)
+    </div>
+    <div class="legendItem-swatch">
+      <svg width="16" height="12">
+        <line x1="0" y1="6" x2="16" y2="6" stroke="#fff" stroke-width="2" />
+      </svg>
+      Actual Usage
+    </div>
+  </div>`;
+
+  return [plot, legend] as const;
 };

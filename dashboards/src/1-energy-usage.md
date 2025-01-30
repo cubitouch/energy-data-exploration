@@ -41,29 +41,19 @@ const usage = usagePerPeriod[timePeriod];
 
 ```js
 import { useUsageAverage } from "./features/usage-average.js";
-const [plotUsageAverage] = useUsageAverage(timePeriod, usage);
+const [plotUsageAverage, legendUsageAverage] = useUsageAverage(
+  timePeriod,
+  usage
+);
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card" style="display: flex">
+  <div class="card" style="display: flex; flex-direction: column;">
     <div style="flex:1;">
-      ${resize((width) => plotUsageAverage(width))}
+      ${resize((width,height) => plotUsageAverage(width,height))}
     </div>
-    <div style="flex: 0;">
-      <div style="display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 12px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <svg width="24" height="12">
-            <line x1="0" y1="6" x2="24" y2="6" stroke="#fff" stroke-width="2" />
-          </svg>
-          <span>Average</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <svg width="24" height="16">
-            <rect width="100%" height="100%" fill="#748899" />
-          </svg>
-          <span>Range</span>
-        </div>
-      </div>
+    <div>
+      ${legendUsageAverage}
     </div>
   </div>
 </div>
@@ -82,31 +72,12 @@ const [plotUsageEstimates, legendUsageEstimates] = useUsageEstimates(
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card" style="display: flex">
+  <div class="card" style="display: flex; flex-direction: column;">
     <div style="flex:1;">
       ${resize((width, height) => plotUsageEstimates(width, height))}
     </div>
-    <div style="flex: 0;">
-      <div style="display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 12px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <svg width="24" height="12">
-            <line x1="0" y1="6" x2="24" y2="6" stroke="#748899" stroke-width="2" />
-          </svg>
-          <span>Estimated (D-1)</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <svg width="24" height="12">
-            <line x1="0" y1="6" x2="24" y2="6" stroke="#cbefe2" stroke-width="2" stroke-dasharray="4" />
-          </svg>
-          <span>Estimated (D)</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <svg width="24" height="12">
-            <line x1="0" y1="6" x2="24" y2="6" stroke="#fff" stroke-width="2" />
-          </svg>
-          <span>Actual Usage</span>
-        </div>
-      </div>
+    <div>
+      ${legendUsageEstimates}
     </div>
   </div>
 </div>
@@ -115,4 +86,5 @@ const [plotUsageEstimates, legendUsageEstimates] = useUsageEstimates(
 **Hypothesis**: Are the D-1 estimates used to arrange the import/export of energy?
 
 **Hypothesis**: Are the D estimates always slightly higher than the actual usage to account for possible spikes?
+
 </div>

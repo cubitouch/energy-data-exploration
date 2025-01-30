@@ -1,5 +1,6 @@
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
+import { html } from "npm:htl";
 import { timeAxisOptions } from "../utils/formats.js";
 
 interface EnergyUsage {
@@ -16,7 +17,7 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
       marginTop: 32,
       marginLeft: 48,
       marginRight: 64,
-      marginBottom: 64,
+      marginBottom: 48,
       x: { ...timeAxisOptions(timePeriod) },
       y: {
         grid: true,
@@ -32,7 +33,7 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
             marginTop: 32,
             marginLeft: 48,
             marginRight: 64,
-            marginBottom: 64,
+            marginBottom: 48,
             width,
             height: height - 32,
             x: {
@@ -72,5 +73,23 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
       ],
     });
 
-  return [plot] as const;
+  const legend = html`<div
+    class="legendItem-swatches-wrap"
+    style="gap: 32px; justify-content: center;"
+  >
+    <div class="legendItem-swatch">
+      <svg width="16" height="12">
+        <line x1="0" y1="6" x2="16" y2="6" stroke="#fff" stroke-width="2" />
+      </svg>
+      Usage
+    </div>
+    <div class="legendItem-swatch">
+      <svg width="16" height="16">
+        <rect width="100%" height="100%" fill="#748899" />
+      </svg>
+      Carbon Impact
+    </div>
+  </div>`;
+
+  return [plot, legend] as const;
 };
