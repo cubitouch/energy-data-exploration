@@ -31,6 +31,7 @@ export const useEnergyTypeBreakdown = (
       grid: true,
       label: "Usage",
       tickFormat: ".2s",
+      nice: true,
     },
     color: {
       domain: ["Non Renewable", "Renewable"],

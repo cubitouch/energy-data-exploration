@@ -49,6 +49,7 @@ export const useExchangeBreakdown = (
       grid: true,
       label: "Import",
       tickFormat: ".2s",
+      nice: true,
     },
     color: {
       domain: ["England", "Spain", "Italy", "Swiss", "Germany and Belgium"],

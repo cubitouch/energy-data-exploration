@@ -20,11 +20,14 @@ export const useUsageAverage = (timePeriod: number, data: EnergyUsage[]) => {
       y: {
         grid: true,
         label: "MW",
-        domain: [0, d3.max(data, (d: EnergyUsage) => d.usage_max)],
+        domain: [
+          d3.min(data, (d: EnergyUsage) => d.usage_min),
+          d3.max(data, (d: EnergyUsage) => d.usage_max),
+        ],
+        nice: true,
         tickFormat: ".2s",
       },
       marks: [
-        Plot.ruleY([0]),
         Plot.areaY(data, {
           x: "timestamp_date",
           y1: "usage_min",

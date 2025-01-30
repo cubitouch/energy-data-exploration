@@ -21,6 +21,7 @@ export const useUsageEstimates = (timePeriod: number, data: EnergyUsage[]) => {
         grid: true,
         label: "MW",
         tickFormat: ".2s",
+        nice: true,
       },
       marks: [
         Plot.lineY(data, {
