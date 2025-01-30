@@ -9,11 +9,12 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
-- refactor legends into components
+- refactor FileAttachment time period switcher into a helper
 - document/explain the data source (origin, frequency, time span, etc)
 - Excalidraw the hell ouf of the architecture (tools, data flow)
 - add a page pointing at GitHub
 - add a link back to hugocarnicelli.com
+- find better formatting solution (12k MW -> 12B W?)
 - CICD for Terraform and (Node) Lambda
 - use ChartJS instead of Observable.Plot?
   - clickable legend filtering

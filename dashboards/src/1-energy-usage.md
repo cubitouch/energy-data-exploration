@@ -4,7 +4,7 @@ toc: false
 
 # Energy Usage
 
-<div class="grid grid-cols-1">
+<div class="grid grid-cols-1 time-picker">
 
 ```js
 const timePeriod = view(

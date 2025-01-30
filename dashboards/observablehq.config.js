@@ -72,6 +72,33 @@ export default {
       margin-right: 0.5em;
     }
 
+    .time-picker {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--theme-background-a);
+      border-bottom: 1px solid var(--theme-background-alt);
+    }
+    .time-picker input {
+      visibility: hidden;
+      position: absolute;
+    }
+    .time-picker form label {
+      display: inline-block;
+      padding: 8px 16px;
+    }
+    .time-picker form div label {
+      cursor: pointer;
+      margin-right: 5px;
+      transition: background 0.1s;
+      background: var(--theme-background-alt);
+    }
+
+    .time-picker label:has(input[type="radio"]:checked) {
+      background: var(--theme-foreground-focus);
+      color: var(--theme-background-alt);
+    }
+
     </style>
   `,
 
