@@ -55,16 +55,19 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
                 x: "timestamp_date",
                 y: "co2_impact",
                 fill: "#728698",
-                tip: true,
-                title: (d: EnergyUsage) => `Date: ${d3.timeFormat("%d %b %Y")(
-                  new Date(d.timestamp_date)
-                )}
-            \nImpact: ${d3.format(".2s")(d.co2_impact)} g
-            \nUsage: ${d3.format(".2s")(d.usage)} MW`,
               }),
             ],
           })) as Plot.Markish,
-        Plot.lineY(data, { x: "timestamp_date", y: "usage" }),
+        Plot.lineY(data, {
+          x: "timestamp_date",
+          y: "usage",
+          tip: true,
+          title: (d: EnergyUsage) => `Date: ${d3.timeFormat("%d %b %Y")(
+            new Date(d.timestamp_date)
+          )}
+          \nImpact: ${d3.format(".2s")(d.co2_impact)} g
+          \nUsage: ${d3.format(".2s")(d.usage)} MW`,
+        }),
         Plot.dot(data, {
           x: "timestamp_date",
           y: "usage",
