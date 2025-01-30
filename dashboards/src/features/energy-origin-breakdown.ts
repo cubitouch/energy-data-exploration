@@ -87,6 +87,7 @@ export const useEnergyOriginBreakdown = (
         )(new Date(d.timestamp_date))}
                   \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
       }),
+      Plot.ruleY([0]),
     ],
   };
 

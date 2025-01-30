@@ -68,6 +68,7 @@ export const useExchangeBreakdown = (
               \n${d.source}: ${d3.format(".2s")(d.usage)} MW`,
         })
       ),
+      Plot.ruleY([0]),
     ],
   };
 
