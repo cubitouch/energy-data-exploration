@@ -55,6 +55,8 @@ const [plot, legend] = useEnergyTypeBreakdown(timePeriod, usage);
 
 <div class="note">
 
+For clarity, are considered **renewable**: Wind, Solar, Hydropower, Bioenergy.
+
 **Hypothesis**: This page would benefit from additional charts to represent [green and clean](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy) energy usage.
 
 </div>
