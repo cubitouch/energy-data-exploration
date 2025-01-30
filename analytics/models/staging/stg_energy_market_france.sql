@@ -49,9 +49,17 @@ SELECT
     pumped_storage,
     bioenergy,
 
-    -- TODO: move this to intermediate model
-    wind + solar + hydropower + pumped_storage + bioenergy as renewable,
+    -- TODO: move this to intermediate model?
+    wind + solar + hydropower + bioenergy as renewable,
     fuel_oil + coal + gas + nuclear as non_renewable,
+
+    -- according to https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy
+    wind + solar  + bioenergy as green,
+    fuel_oil + coal + gas + nuclear + hydropower  as non_green,
+    
+    -- according to https://chariotenergy.com/chariot-university/clean-energy
+    wind + solar + hydropower + bioenergy + nuclear + gas as clean,
+    fuel_oil + coal as non_clean,
 
     import_england,
     import_spain,
