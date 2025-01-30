@@ -86,12 +86,15 @@ export default {
     .time-picker form label {
       display: inline-block;
       padding: 8px 16px;
+      user-select: none;
     }
     .time-picker form div label {
       cursor: pointer;
       margin-right: 5px;
-      transition: background 0.1s;
       background: var(--theme-background-alt);
+    }
+    .time-picker form div label:hover {
+      background: #728698;
     }
 
     .time-picker label:has(input[type="radio"]:checked) {
