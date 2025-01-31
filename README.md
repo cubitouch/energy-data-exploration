@@ -12,12 +12,12 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Excalidraw the hell ouf of the architecture (tools, data flow)
 - Data Quality: add data freshness indicator
 - Add linear regression chart to show correlation between non-clean energy and carbon footprint
-- Integrate [Elementary](https://docs.elementary-data.com/oss/oss-introduction)
 - Add charts to represent usage and working/ooo hours
 - Add headlines (e.g. total/avg energy used over the period)
 - Refactor data models to:
   * put business logic (co2, energy origin category) in `intermediate` layer
   * have `fact` models for hour and day aggregated data
+- Check [Elementary](https://docs.elementary-data.com/oss/oss-introduction) report after some time (setup on the 31st January 2025)
 - Ingest meteorological data (wind speed, solar radiation, rainfall) to correlate with renewables
 - Add comparison with previous period
 - Find better formatting solution (12k MW -> 12B W?)
