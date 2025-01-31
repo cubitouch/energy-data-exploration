@@ -11,8 +11,11 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 # TODO
 - Excalidraw the hell ouf of the architecture (tools, data flow)
 - Data Quality: add data freshness indicator
+- Add linear regression chart to show correlation between non-clean energy and carbon footprint
 - Integrate [Elementary](https://docs.elementary-data.com/oss/oss-introduction)
+- Add charts to represent usage and working/ooo hours
 - Add headlines (e.g. total/avg energy used over the period)
+- Ingest meteorological data (wind speed, solar radiation, rainfall) to correlate with renewables
 - Add comparison with previous period
 - Find better formatting solution (12k MW -> 12B W?)
 - refactor FileAttachment time period switcher into a helper
