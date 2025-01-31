@@ -17,7 +17,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Refactor data models to:
   * put business logic (co2, energy origin category) in `intermediate` layer
   * have `fact` models for hour and day aggregated data
-- Check [Elementary](https://docs.elementary-data.com/oss/oss-introduction) report after some time (setup on the 31st January 2025)
+- Publish [Elementary](https://docs.elementary-data.com/oss/oss-introduction) report as artefact if tests are failing?
 - Ingest meteorological data (wind speed, solar radiation, rainfall) to correlate with renewables
 - Add comparison with previous period
 - Find better formatting solution (12k MW -> 12B W?)

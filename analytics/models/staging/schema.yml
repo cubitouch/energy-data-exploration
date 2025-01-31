@@ -9,6 +9,9 @@ sources:
 models:
   - name: stg_energy_market_france
     description: "Energy (MW) consumption and topology"
+    config:
+      elementary:
+        timestamp_column: t
     columns:
       - name: t
         description: "Timestamp, the primary key for this table (by 15 minutes increments)"
@@ -17,6 +20,8 @@ models:
           - not_null
       - name: actual
         description: "The effective energy consumption for the period"
+        tests:
+          - elementary.column_anomalies
       - name: estimated_d1
         description: "Previous day estimated energy consumption for the period"
       - name: estimated_d
@@ -67,3 +72,7 @@ models:
         description: "Amount of energy imported from Switzerland (half hourly data, negative means export)"
       - name: import_germany_belgium
         description: "Amount of energy imported from Germany and Belgium (half hourly data, negative means export)"
+    tests:
+      - elementary.volume_anomalies
+      - elementary.freshness_anomalies
+
