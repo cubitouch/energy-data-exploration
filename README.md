@@ -9,7 +9,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
-- Add Heatmap to Carbon Impact page
 - Excalidraw the hell ouf of the architecture (tools, data flow)
 - Data Quality: add data freshness indicator
 - Integrate [Elementary](https://docs.elementary-data.com/oss/oss-introduction)
