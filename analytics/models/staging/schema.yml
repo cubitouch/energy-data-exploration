@@ -48,6 +48,14 @@ models:
         description: "Amount of renewable based energy consumed for the period"
       - name: non_renewable
         description: "Amount of non renewable based energy consumed for the period"
+      - name: green
+        description: "Amount of green energy consumed for the period"
+      - name: non_green
+        description: "Amount of non green energy consumed for the period"
+      - name: clean
+        description: "Amount of clean energy consumed for the period"
+      - name: non_clean
+        description: "Amount of non clean energy consumed for the period"
 
       - name: import_england
         description: "Amount of energy imported from England (half hourly data, negative means export)"
@@ -55,5 +63,7 @@ models:
         description: "Amount of energy imported from Spain (half hourly data, negative means export)"
       - name: import_italy
         description: "Amount of energy imported from Italy (half hourly data, negative means export)"
+      - name: import_swiss
+        description: "Amount of energy imported from Switzerland (half hourly data, negative means export)"
       - name: import_germany_belgium
         description: "Amount of energy imported from Germany and Belgium (half hourly data, negative means export)"

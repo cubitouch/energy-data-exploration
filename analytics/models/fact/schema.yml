@@ -29,17 +29,30 @@ models:
         description: "The average energy consumption for the period"
         data_tests:
           - not_null
+
       - name: co2_impact
         description: "The co2 (gram) impact for the period total energy consumption"
+
       - name: usage_renewable
         description: "The effective renewable energy consumption for the period"
       - name: usage_non_renewable
         description: "The effective non renewable energy consumption for the period"
+      - name: usage_green
+        description: "The effective green energy consumption for the period"
+      - name: usage_non_green
+        description: "The effective non green energy consumption for the period"
+      - name: usage_clean
+        description: "The effective clean energy consumption for the period"
+      - name: usage_non_clean
+        description: "The effective non clean energy consumption for the period"
+
       - name: import_england
         description: "Amount of energy imported from England for the period (negative means export)"
       - name: import_spain
         description: "Amount of energy imported from Spain for the period (negative means export)"
       - name: import_italy
         description: "Amount of energy imported from Italy for the period (negative means export)"
+      - name: import_swiss
+        description: "Amount of energy imported from Switzerland for the period (negative means export)"
       - name: import_germany_belgium
         description: "Amount of energy imported from Germany and Belgium for the period (negative means export)"
