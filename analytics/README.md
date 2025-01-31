@@ -4,6 +4,7 @@ Welcome to your new dbt project!
 
 ```
 pip install dbt-core dbt-postgres
+pip install elementary-data
 ```
 
 ### Using the starter project

@@ -5,4 +5,5 @@ node_modules
 
 lambdas/node/dist
 lambdas/python/venv
-analytics/.dbt/profiles.yml
+analytics/.dbt
+analytics/edr_target
