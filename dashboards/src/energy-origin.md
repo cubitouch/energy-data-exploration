@@ -95,6 +95,8 @@ For clarity, are considered as:
 
 At the time of writing, although Nuclear being considered as _clean_ is debatable, the above chart indicates that France is using mostly clean energy.
 
+**Improvement**: This chart would benefit from not being stacked. By doing so we would be able to tweak the Y scale, making the smaller serie more readable.
+
 </div>
 
 ```js
