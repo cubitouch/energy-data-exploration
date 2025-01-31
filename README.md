@@ -10,7 +10,8 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 # TODO
 - Excalidraw the hell ouf of the architecture (tools, data flow)
-- find better formatting solution (12k MW -> 12B W?)
+- Integrate [Elementary](https://docs.elementary-data.com/oss/oss-introduction)
+- Find better formatting solution (12k MW -> 12B W?)
 - refactor FileAttachment time period switcher into a helper
 - CICD for Terraform and (Node) Lambda
 - use ChartJS instead of Observable.Plot?
