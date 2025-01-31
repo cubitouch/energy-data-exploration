@@ -12,4 +12,4 @@ More details are available on [GitHub](https://github.com/cubitouch/energy-data-
 
 ## Who made this?
 
-My name is Hugo, and I play with Data. You can learn more about me at [hugocarnicelli.com](https://hugocarnicelli.com). See you there! 👋
+My name is Hugo, and I work with Data. You can learn more about me at [hugocarnicelli.com](https://hugocarnicelli.com). See you there! 👋

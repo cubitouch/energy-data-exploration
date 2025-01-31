@@ -50,7 +50,7 @@ const [plotClean, legendClean] = useCleanBreakdown(timePeriod, usage);
 
 <div class="note">
 
-For clarity, are considered:
+For clarity, are considered as:
 
 - **renewable**: Wind, Solar, Hydropower, Bioenergy
 - **green**: Wind, Solar, Bioenergy (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy))
@@ -93,7 +93,7 @@ For clarity, are considered:
 
 <div class="note">
 
-At the time of writting, although Nuclear being considered as _clean_ is debatable, the above chart indicates that France is using mostly clean energy.
+At the time of writing, although Nuclear being considered as _clean_ is debatable, the above chart indicates that France is using mostly clean energy.
 
 </div>
 
@@ -114,7 +114,7 @@ const [plotOrigin, legendOrigin] = useEnergyOriginBreakdown(timePeriod, usage);
 </div>
 
 <div class="warning">
-Given that most French energy is nuclear, the scale here is square root to facilitate reading trend changes.
+Given that most French energy is nuclear, the scale here is adjusted to a square root scale to facilitate reading trend changes.
 </div>
 <div class="note">
 

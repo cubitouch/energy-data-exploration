@@ -59,7 +59,7 @@ const dataQuality = FileAttachment("data/data-quality.csv").csv({
   </div>
 </div>
 <div class="note">
-Any digit represented as <span style="background: #cbefe2; color: #384259; padding: 2px;">31</span> does not have the expected number of energy usage data points. This is usually the case for the next couple days as estimates are transmitted as they are calculated.
+Any dates represented as <span style="background: #cbefe2; color: #384259; padding: 2px;">31</span> does not have the expected number of energy usage data points. This is usually the case for the next couple days as estimates are transmitted as they are calculated.
 
-Any digit represented as <span style="background: #384259; color: white; padding: 2px;">31</span> are considered normal.
+Any dates represented as <span style="background: #384259; color: white; padding: 2px;">31</span> are considered normal.
 </div>

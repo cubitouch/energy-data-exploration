@@ -75,7 +75,7 @@ const [plotUsageNonGreen, legendUsageNonGreen] = useUsageVsCarbon(
 
 Energy usage alone doesn't entirely correlate with carbon impact.
 
-**Hypothesis**: Could carbon impact correlate with the energy origin (non renewable, coal, etc)?
+**Hypothesis**: Could carbon impact correlate with the energy origin (non-renewable, coal, etc)?
 
 </div>
 
@@ -121,7 +121,7 @@ const [plotUsageHeatmap, legendUsageHeatmap] =
 </div>
 <div class="note">
 
-**Fuel Oil** and **Coal** are considered non clean (see [here](https://chariotenergy.com/chariot-university/clean-energy)).
+**Fuel Oil** and **Coal** are considered non-clean (see [here](https://chariotenergy.com/chariot-university/clean-energy)).
 
 </div>
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
@@ -136,13 +136,13 @@ const [plotUsageHeatmap, legendUsageHeatmap] =
 </div>
 <div class="note">
 
-**Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
+**Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non-green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
 
 </div>
 <div class="note">
 
-The correlation between non clean energy and carbon impact isn't as clear cut as I'd have hoped.
+The correlation between non-clean energy and carbon impact isn't as clear cut as I'd have hoped.
 
-**Hypothesis**: Could the proportion of non clean energy correlate better?
+**Hypothesis**: Could the proportion of non-clean energy correlate better?
 
 </div>
