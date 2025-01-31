@@ -6,12 +6,25 @@ import { timeAxisOptions } from "../utils/formats.js";
 interface EnergyUsage {
   timestamp_date: string;
   usage: number;
+  usage_non_renewable: number;
+  usage_non_green: number;
+  usage_non_clean: number;
   co2_impact: number;
 }
-export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
+type EnergyUsageType =
+  | "usage"
+  | "usage_non_renewable"
+  | "usage_non_green"
+  | "usage_non_clean";
+export const useUsageVsCarbon = (
+  timePeriod: number,
+  data: EnergyUsage[],
+  type: EnergyUsageType,
+  title: string
+) => {
   const plot = (width: number, height: number) =>
     Plot.plot({
-      title: "Energy Usage and Carbon Impact",
+      title,
       width,
       height: height - 32,
       marginTop: 32,
@@ -22,7 +35,7 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
       y: {
         grid: true,
         label: "Energy (MW)",
-        domain: d3.extent(data, (d: EnergyUsage) => d.usage),
+        domain: d3.extent(data, (d: EnergyUsage) => d[type]),
         tickFormat: ".2s",
         nice: true,
       },
@@ -60,17 +73,17 @@ export const useUsageVsCarbon = (timePeriod: number, data: EnergyUsage[]) => {
           })) as Plot.Markish,
         Plot.lineY(data, {
           x: "timestamp_date",
-          y: "usage",
+          y: type,
           tip: true,
           title: (d: EnergyUsage) => `Date: ${d3.timeFormat("%d %b %Y")(
             new Date(d.timestamp_date)
           )}
           \nImpact: ${d3.format(".2s")(d.co2_impact)} g
-          \nUsage: ${d3.format(".2s")(d.usage)} MW`,
+          \nUsage: ${d3.format(".2s")(d[type])} MW`,
         }),
         Plot.dot(data, {
           x: "timestamp_date",
-          y: "usage",
+          y: type,
           fill: "white",
         }),
       ],

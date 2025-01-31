@@ -10,9 +10,9 @@ export default {
     {
       name: "Energy Market France",
       pages: [
-        { name: "Exploration", path: "/energy-market-france" },
         { name: "Usage", path: "/energy-usage" },
         { name: "Origin", path: "/energy-origin" },
+        { name: "Carbon Impact", path: "/carbon-impact" },
         { name: "Data Quality", path: "/data-quality" },
       ],
     },
