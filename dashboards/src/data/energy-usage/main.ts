@@ -13,6 +13,10 @@ export const getQuery = (days: number) => `
 
     SUM(usage_renewable) as usage_renewable,
     SUM(usage_non_renewable) as usage_non_renewable,
+    SUM(usage_green) as usage_green,
+    SUM(usage_non_green) as usage_non_green,
+    SUM(usage_clean) as usage_clean,
+    SUM(usage_non_clean) as usage_non_clean,
 
     SUM(usage_fuel_oil) AS usage_fuel_oil,
     SUM(usage_coal) AS usage_coal,

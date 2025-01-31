@@ -38,9 +38,25 @@ const usagePerPeriod = {
 };
 const usage = usagePerPeriod[timePeriod];
 
-import { useEnergyTypeBreakdown } from "./features/energy-type-breakdown.js";
-const [plot, legend] = useEnergyTypeBreakdown(timePeriod, usage);
+import {
+  useRenewableBreakdown,
+  useGreenBreakdown,
+  useCleanBreakdown,
+} from "./features/category-breakdown.js";
+const [plot, legend] = useRenewableBreakdown(timePeriod, usage);
+const [plotGreen, legendGreen] = useGreenBreakdown(timePeriod, usage);
+const [plotClean, legendClean] = useCleanBreakdown(timePeriod, usage);
 ```
+
+<div class="note">
+
+For clarity, are considered:
+
+- **renewable**: Wind, Solar, Hydropower, Bioenergy
+- **green**: Wind, Solar, Bioenergy (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy))
+- **clean**: Wind, Solar, Hydropower, Bioenergy, Nuclear, Gas (see [here](https://chariotenergy.com/chariot-university/clean-energy))
+
+</div>
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex">
@@ -53,11 +69,31 @@ const [plot, legend] = useEnergyTypeBreakdown(timePeriod, usage);
   </div>
 </div>
 
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex">
+    <div style="flex:1;">
+      ${resize((width, height) => plotGreen(width, height))}
+    </div>
+    <div style="flex: 0;">
+      ${legendGreen}
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex">
+    <div style="flex:1;">
+      ${resize((width, height) => plotClean(width, height))}
+    </div>
+    <div style="flex: 0;">
+      ${legendClean}
+    </div>
+  </div>
+</div>
+
 <div class="note">
 
-For clarity, are considered **renewable**: Wind, Solar, Hydropower, Bioenergy.
-
-**Hypothesis**: This page would benefit from additional charts to represent [green and clean](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy) energy usage.
+At the time of writting, although Nuclear being considered as _clean_ is debatable, the above chart indicates that France is using mostly clean energy.
 
 </div>
 
