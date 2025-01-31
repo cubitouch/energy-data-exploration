@@ -5,25 +5,36 @@ interface EnergyUsageOverWeek {
   hour: number;
   day_of_week: number;
   usage: number;
+  co2_impact: number;
 }
-export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
+interface HeatmapOptions {
+  title: string;
+  type: "usage" | "co2_impact";
+  typeTooltip: (d: EnergyUsageOverWeek) => string;
+  reversedColorRange: boolean;
+  legendLabel: string;
+  domain: number[];
+}
+const useHeatmap = (data: EnergyUsageOverWeek[], options: HeatmapOptions) => {
+  const colorRange = ["#384259", "#748899", "#cbefe2", "#ebf9f4", "#ffffff"];
+
   const plot = (width, height) =>
     Plot.plot({
       width,
       height: height - 84,
       marginBottom: 32,
-      title: "Energy Usage Over the Week",
+      title: options.title,
       marks: [
         Plot.cell(data, {
           x: "hour",
           y: "day_of_week",
-          fill: "usage",
+          fill: options.type,
           tip: true,
           title: (d: EnergyUsageOverWeek) => `${Plot.formatWeekday(
             "en-US",
             "long"
           )(d.day_of_week)} ${d.hour}:00 - ${d.hour + 1}:00
-        \nUsage: ${d3.format(".2s")(d.usage)} MW`,
+        \n${options.typeTooltip(d)}`,
         }),
       ],
       color: {
@@ -31,12 +42,16 @@ export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
         range: d3.quantize(
           d3
             .scaleLinear()
-            .domain([0, 0.5, 0.75, 0.9, 1]) // Relative positions for the colors
-            .range(["#384259", "#748899", "#cbefe2", "#ebf9f4", "#ffffff"]) // Start, middle, and end colors
+            .domain(options.domain) // Relative positions for the colors
+            .range(
+              options.reversedColorRange
+                ? [...colorRange].reverse()
+                : colorRange
+            ) // Start, middle, and end colors
             .interpolate(d3.interpolateRgb),
           20
         ), // Use RGB interpolation
-        label: "Average (MW)",
+        label: options.legendLabel,
       },
       x: {
         label: "",
@@ -56,4 +71,25 @@ export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
   });
 
   return [plot, legend];
+};
+
+export const useEnergyUsageHeatmap = (data: EnergyUsageOverWeek[]) => {
+  return useHeatmap(data, {
+    title: "Energy Usage Over the Week",
+    type: "usage",
+    typeTooltip: (d) => `Usage: ${d3.format(".2s")(d.usage)} MW`,
+    legendLabel: "Average (MW)",
+    reversedColorRange: false,
+    domain: [0, 0.5, 0.75, 0.9, 1],
+  });
+};
+export const useCarbonImpactHeatmap = (data: EnergyUsageOverWeek[]) => {
+  return useHeatmap(data, {
+    title: "Carbon Impact Over the Week",
+    type: "co2_impact",
+    typeTooltip: (d) => `Impact: ${d3.format(".2s")(d.co2_impact)} g`,
+    legendLabel: "Average (g)",
+    reversedColorRange: true,
+    domain: [0, 0.1, 0.25, 0.5, 1],
+  });
 };

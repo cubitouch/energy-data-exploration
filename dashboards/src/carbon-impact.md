@@ -79,6 +79,36 @@ Energy usage alone doesn't entirely correlate with carbon impact.
 
 </div>
 
+```js
+import { useCarbonImpactHeatmap } from "./features/energy-usage-heatmap.js";
+const usageHeatmapPerPeriod = {
+  7: await FileAttachment(`data/energy-usage-heatmap/7-days.csv`).csv({
+    typed: true,
+  }),
+  30: await FileAttachment(`data/energy-usage-heatmap/30-days.csv`).csv({
+    typed: true,
+  }),
+  90: await FileAttachment(`data/energy-usage-heatmap/90-days.csv`).csv({
+    typed: true,
+  }),
+};
+const usageHeatmap = usageHeatmapPerPeriod[timePeriod];
+const [plotUsageHeatmap, legendUsageHeatmap] =
+  useCarbonImpactHeatmap(usageHeatmap);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card">
+    ${resize((width, height) => {
+      const container = html`<div style="display: flex; align-items: center; flex-direction: column"></div>`;
+      const plot = plotUsageHeatmap(width, height);
+      const legend = legendUsageHeatmap;
+      container.append(plot, legend);
+      return container;
+    })}
+  </div>
+</div>
+
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex; flex-direction: column;">
     <div style="flex:1;">
@@ -107,5 +137,12 @@ Energy usage alone doesn't entirely correlate with carbon impact.
 <div class="note">
 
 **Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
+
+</div>
+<div class="note">
+
+The correlation between non clean energy and carbon impact isn't as clear cut as I'd have hoped.
+
+**Hypothesis**: Could the proportion of non clean energy correlate better?
 
 </div>
