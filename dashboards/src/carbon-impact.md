@@ -123,7 +123,10 @@ const [plotUsageHeatmap, legendUsageHeatmap] =
 
 **Fuel Oil** and **Coal** are considered non-clean (see [here](https://chariotenergy.com/chariot-university/clean-energy)).
 
+At the time of writing, the correlation between non-clean energy and carbon impact is more apparent on a 90 days period.
+
 </div>
+
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
   <div class="card" style="display: flex; flex-direction: column;">
     <div style="flex:1;">
@@ -137,12 +140,5 @@ const [plotUsageHeatmap, legendUsageHeatmap] =
 <div class="note">
 
 **Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non-green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
-
-</div>
-<div class="note">
-
-The correlation between non-clean energy and carbon impact isn't as clear cut as I'd have hoped.
-
-**Hypothesis**: Could the proportion of non-clean energy correlate better?
 
 </div>
