@@ -14,6 +14,10 @@ SELECT
 
     SUM(renewable) AS usage_renewable,
     SUM(non_renewable) AS usage_non_renewable,
+    SUM(green) AS usage_green,
+    SUM(non_green) AS usage_non_green,
+    SUM(clean) AS usage_clean,
+    SUM(non_clean) AS usage_non_clean,
 
     SUM(fuel_oil) AS usage_fuel_oil,
     SUM(coal) AS usage_coal,
