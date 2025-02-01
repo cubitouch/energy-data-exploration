@@ -4,7 +4,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 # Architecture
 
-[![Excalidraw diagram](./architecture-excalidraw.png)]
+![Excalidraw diagram](./architecture-excalidraw.png)
 
 # Schedules
 
