@@ -21,7 +21,13 @@ models:
       - name: actual
         description: "The effective energy consumption for the period"
         tests:
-          - elementary.column_anomalies
+          - elementary.column_anomalies:
+              column_anomalies:
+                - min
+                - max
+                - average
+                - standard_deviation
+                - variance
       - name: estimated_d1
         description: "Previous day estimated energy consumption for the period"
       - name: estimated_d
