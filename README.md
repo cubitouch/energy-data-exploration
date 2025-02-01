@@ -2,6 +2,10 @@
 
 Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f0463d88ee3849f5a46ec1).
 
+# Architecture
+
+[![Excalidraw diagram](./architecture-excalidraw.png)]
+
 # Schedules
 
 - Ingestion (AWS Lambda) - 0AM UTC
@@ -9,7 +13,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Publish reports (ObservableHQ/Vercel) - 2AM UTC [![Redeploy to Vercel](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml/badge.svg)](https://github.com/cubitouch/energy-data-exploration/actions/workflows/redeploy-vercel.yml)
 
 # TODO
-- Excalidraw the hell ouf of the architecture (tools, data flow)
 - Data Quality: add data freshness indicator
 - Add charts to represent usage and working/ooo hours
 - Add headlines (e.g. total/avg energy used over the period)
