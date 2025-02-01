@@ -11,7 +11,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 # TODO
 - Excalidraw the hell ouf of the architecture (tools, data flow)
 - Data Quality: add data freshness indicator
-- Add linear regression chart to show correlation between non-clean energy and carbon footprint
 - Add charts to represent usage and working/ooo hours
 - Add headlines (e.g. total/avg energy used over the period)
 - Refactor data models to:

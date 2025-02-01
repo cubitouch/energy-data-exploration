@@ -50,13 +50,13 @@ const [plotUsageNonClean, legendUsageNonClean] = useUsageVsCarbon(
   timePeriod,
   usage,
   "usage_non_clean",
-  "Non Clean Energy Usage and Carbon Impact"
+  "Non-Clean Energy Usage and Carbon Impact"
 );
 const [plotUsageNonGreen, legendUsageNonGreen] = useUsageVsCarbon(
   timePeriod,
   usage,
   "usage_non_green",
-  "Non Green Energy Usage and Carbon Impact"
+  "Non-Green Energy Usage and Carbon Impact"
 );
 ```
 
@@ -140,5 +140,28 @@ At the time of writing, the correlation between non-clean energy and carbon impa
 <div class="note">
 
 **Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non-green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
+
+</div>
+
+```js
+import { useCarbonCorrelation } from "./features/energy-carbon-correlation.js";
+const [plotCarbonCorrelation, legendCarbonCorrelation] =
+  useCarbonCorrelation(usage);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex; flex-direction: column;">
+    <div style="flex:1;">
+      ${resize((width, height) => plotCarbonCorrelation(width, height))}
+    </div>
+    <div>
+      ${legendCarbonCorrelation}
+    </div>
+  </div>
+</div>
+
+<div class="note">
+
+See the [Pearson Correlation Coefficient](https://www.scribbr.com/statistics/pearson-correlation-coefficient/)
 
 </div>

@@ -99,7 +99,7 @@ export const useRenewableBreakdown = (
 export const useGreenBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
   const options: CategoryBreakdownOptions = {
     title: "Green Energy Usage",
-    domain: ["Non Green", "Green"],
+    domain: ["Non-Green", "Green"],
     hightlightColor: "#cbefe2",
   };
 
@@ -114,7 +114,7 @@ export const useGreenBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
       {
         timestamp_date: d.timestamp_date,
         usage: d.usage_non_green,
-        source: "Non Green",
+        source: "Non-Green",
       },
     ]),
     options
@@ -123,7 +123,7 @@ export const useGreenBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
 export const useCleanBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
   const options: CategoryBreakdownOptions = {
     title: "Clean Energy Usage",
-    domain: ["Non Clean", "Clean"],
+    domain: ["Non-Clean", "Clean"],
     hightlightColor: "#ebf9f4",
   };
 
@@ -138,7 +138,7 @@ export const useCleanBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
       {
         timestamp_date: d.timestamp_date,
         usage: d.usage_non_clean,
-        source: "Non Clean",
+        source: "Non-Clean",
       },
     ]),
     options
