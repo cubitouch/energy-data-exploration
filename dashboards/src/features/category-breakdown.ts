@@ -13,8 +13,8 @@ interface EnergyUsage {
 }
 interface CategoryBreakdownOptions {
   title: string;
-  domain: string[];
-  hightlightColor: string;
+  color: Plot.ScaleOptions;
+  type?: Plot.ScaleType;
 }
 export const useCategoryBreakdown = (
   timePeriod: number,
@@ -32,12 +32,10 @@ export const useCategoryBreakdown = (
       grid: true,
       label: "Usage",
       tickFormat: ".2s",
+      type: config.type ?? "linear",
       nice: true,
     },
-    color: {
-      domain: config.domain,
-      range: ["#748899", config.hightlightColor],
-    },
+    color: { ...config.color },
     marks: [
       Plot.barY(
         data,
@@ -74,8 +72,10 @@ export const useRenewableBreakdown = (
 ) => {
   const options: CategoryBreakdownOptions = {
     title: "Renewable Energy Usage",
-    domain: ["Non Renewable", "Renewable"],
-    hightlightColor: "#ebf9f4",
+    color: {
+      domain: ["Non Renewable", "Renewable"],
+      range: ["#748899", "#ebf9f4"],
+    },
   };
 
   return useCategoryBreakdown(
@@ -96,49 +96,28 @@ export const useRenewableBreakdown = (
   );
 };
 
-export const useGreenBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
-  const options: CategoryBreakdownOptions = {
-    title: "Green Energy Usage",
-    domain: ["Non-Green", "Green"],
-    hightlightColor: "#cbefe2",
-  };
-
-  return useCategoryBreakdown(
-    timePeriod,
-    data.flatMap((d) => [
-      {
-        timestamp_date: d.timestamp_date,
-        usage: d.usage_green,
-        source: "Green",
-      },
-      {
-        timestamp_date: d.timestamp_date,
-        usage: d.usage_non_green,
-        source: "Non-Green",
-      },
-    ]),
-    options
-  );
-};
 export const useCleanBreakdown = (timePeriod: number, data: EnergyUsage[]) => {
   const options: CategoryBreakdownOptions = {
     title: "Clean Energy Usage",
-    domain: ["Non-Clean", "Clean"],
-    hightlightColor: "#ebf9f4",
+    color: {
+      domain: ["Clean", "Non-Clean"],
+      range: ["#ebf9f4", "#748899"],
+    },
+    type: "sqrt",
   };
 
   return useCategoryBreakdown(
     timePeriod,
     data.flatMap((d) => [
-      {
-        timestamp_date: d.timestamp_date,
-        usage: d.usage_clean,
-        source: "Clean",
-      },
       {
         timestamp_date: d.timestamp_date,
         usage: d.usage_non_clean,
         source: "Non-Clean",
+      },
+      {
+        timestamp_date: d.timestamp_date,
+        usage: d.usage_clean,
+        source: "Clean",
       },
     ]),
     options

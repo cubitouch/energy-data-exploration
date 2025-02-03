@@ -44,7 +44,6 @@ import {
   useCleanBreakdown,
 } from "./features/category-breakdown.js";
 const [plot, legend] = useRenewableBreakdown(timePeriod, usage);
-const [plotGreen, legendGreen] = useGreenBreakdown(timePeriod, usage);
 const [plotClean, legendClean] = useCleanBreakdown(timePeriod, usage);
 ```
 
@@ -53,7 +52,6 @@ const [plotClean, legendClean] = useCleanBreakdown(timePeriod, usage);
 For clarity, are considered as:
 
 - **renewable**: Wind, Solar, Hydropower, Bioenergy
-- **green**: Wind, Solar, Bioenergy (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy))
 - **clean**: Wind, Solar, Hydropower, Bioenergy, Nuclear, Gas (see [here](https://chariotenergy.com/chariot-university/clean-energy))
 
 </div>
@@ -65,17 +63,6 @@ For clarity, are considered as:
     </div>
     <div style="flex: 0;">
       ${legend}
-    </div>
-  </div>
-</div>
-
-<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card" style="display: flex">
-    <div style="flex:1;">
-      ${resize((width, height) => plotGreen(width, height))}
-    </div>
-    <div style="flex: 0;">
-      ${legendGreen}
     </div>
   </div>
 </div>
