@@ -52,12 +52,6 @@ const [plotUsageNonClean, legendUsageNonClean] = useUsageVsCarbon(
   "usage_non_clean",
   "Non-Clean Energy Usage and Carbon Impact"
 );
-const [plotUsageNonGreen, legendUsageNonGreen] = useUsageVsCarbon(
-  timePeriod,
-  usage,
-  "usage_non_green",
-  "Non-Green Energy Usage and Carbon Impact"
-);
 ```
 
 <div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
@@ -122,24 +116,6 @@ const [plotUsageHeatmap, legendUsageHeatmap] =
 <div class="note">
 
 **Fuel Oil** and **Coal** are considered non-clean (see [here](https://chariotenergy.com/chariot-university/clean-energy)).
-
-At the time of writing, the correlation between non-clean energy and carbon impact is more apparent on a 90 days period.
-
-</div>
-
-<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
-  <div class="card" style="display: flex; flex-direction: column;">
-    <div style="flex:1;">
-      ${resize((width, height) => plotUsageNonGreen(width, height))}
-    </div>
-    <div>
-      ${legendUsageNonGreen}
-    </div>
-  </div>
-</div>
-<div class="note">
-
-**Fuel Oil**, **Coal**, **Gas**, **Nuclear** and **Hydropower** are considered non-green (see [here](https://palmetto.com/solar/difference-between-green-clean-and-renewable-energy)).
 
 </div>
 

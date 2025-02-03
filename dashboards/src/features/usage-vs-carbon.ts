@@ -13,8 +13,6 @@ interface EnergyUsage {
 }
 type EnergyUsageType =
   | "usage"
-  | "usage_non_renewable"
-  | "usage_non_green"
   | "usage_non_clean";
 export const useUsageVsCarbon = (
   timePeriod: number,
