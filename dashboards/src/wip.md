@@ -38,3 +38,40 @@ const [plotPerMonth, legendPerMonth] = usePerMonth(perMonth);
     </div>
   </div>
 </div>
+
+```js
+import { useRatingsPerPostalCode } from "./features/reports/ratings-per-postal-code.js";
+const ratingsPerPostalCode = await FileAttachment(
+  `data/reports/ratings-per-postal-code.csv`
+).csv({
+  typed: true,
+});
+const [plotRatingsPerPostalCode, legendRatingsPerPostalCode] =
+  useRatingsPerPostalCode(ratingsPerPostalCode);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex; flex-direction: column;">
+    <div style="flex:1;">
+      ${resize((width,height) => plotRatingsPerPostalCode(width,height))}
+    </div>
+    <div style="flex: 0; justify-items: center;">
+      ${legendRatingsPerPostalCode}
+    </div>
+  </div>
+</div>
+
+<div class="note">
+
+There is a low amount of properties rated A, B or C.
+
+Assumption #1 - incorrect ❌
+
+</div>
+<div class="note">
+
+At the time of writing 75020, 75013 and 75019 postal codes have a higher number of properties having been energy performance rated either A, B or C.
+
+Assumption #2 - confirmed ✅
+
+</div>

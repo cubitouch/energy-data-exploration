@@ -1,18 +1,19 @@
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 
-interface Report {
+interface Summary {
   report_month: string;
   count: number;
 }
-export const usePerMonth = (data: Report[]) => {
+export const usePerMonth = (data: Summary[]) => {
   const plot = (width: number, height: number) =>
     Plot.plot({
       title: "How many Energy Performance reports since June 2021?",
       width,
       height: height - 48,
+      marginBottom: 64,
       marginTop: 32,
-      marginLeft: 32,
+      marginLeft: 48,
       x: {
         tickRotate: -45,
         label: "",
