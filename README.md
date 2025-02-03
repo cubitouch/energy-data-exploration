@@ -14,7 +14,6 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 
 # TODO
 - Refactor data models to:
-  * put business logic (co2, energy origin category) in `intermediate` layer
   * have `fact` models for hour and day aggregated data
 - Find better formatting solution (12k MW -> 12B W?)
 - Data Quality: add data freshness indicator
