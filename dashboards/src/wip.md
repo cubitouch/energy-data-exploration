@@ -75,3 +75,33 @@ At the time of writing 75020, 75013 and 75019 postal codes have a higher number 
 Assumption #2 - confirmed ✅
 
 </div>
+
+```js
+import { useRatingsPerFloor } from "./features/reports/ratings-per-floor.js";
+const ratingsPerFloor = await FileAttachment(
+  `data/reports/ratings-per-floor.csv`
+).csv({
+  typed: true,
+});
+const [plotRatingsPerFloor, legendRatingsPerFloor] =
+  useRatingsPerFloor(ratingsPerFloor);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex; flex-direction: column;">
+    <div style="flex:1;">
+      ${resize((width,height) => plotRatingsPerFloor(width,height))}
+    </div>
+    <div style="flex: 0; justify-items: center;">
+      ${legendRatingsPerFloor}
+    </div>
+  </div>
+</div>
+
+<div class="note">
+
+There seem to be proportionally more well rated properties on the ground floor than on other floors.
+
+Assumption #3 - incorrect ❌
+
+</div>
