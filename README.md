@@ -20,7 +20,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Data Quality: add data freshness indicator
 - Add charts to represent usage and working/ooo hours
 - Add headlines (e.g. total/avg energy used over the period)
-- Publish [Elementary](https://docs.elementary-data.com/oss/oss-introduction) report as artefact if tests are failing?
+- Publish [Elementary](https://docs.elementary-data.com/oss/guides/share-observability-report/host-on-s3) report
 - Ingest meteorological data (wind speed, solar radiation, rainfall) to correlate with renewables
 - Add comparison with previous period
 - refactor FileAttachment time period switcher into a helper
