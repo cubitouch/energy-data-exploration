@@ -35,5 +35,5 @@ SELECT
     -- according to https://chariotenergy.com/chariot-university/clean-energy
     wind + solar + hydropower + bioenergy + nuclear + gas as clean,
     fuel_oil + coal as non_clean
-FROM {{ ref('int_energy_market_france') }}
+FROM {{ ref('stg_energy_market_france') }}
 ORDER BY 1
