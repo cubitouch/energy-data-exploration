@@ -1,6 +1,8 @@
+{{ config(materialized='table') }}
+
 SELECT
     n_dpe AS id,
-    date_tablissement_dpe AS report_date,
+    TO_TIMESTAMP(date_tablissement_dpe, 'YYYY-MM-DD') AS report_date,
     etiquette_ges AS ges_label,
     etiquette_dpe AS dpe_label,
     ann_e_construction AS building_year,
