@@ -6,6 +6,11 @@ sources:
     tables:
       - name: raw_energy_market_france
 
+  - name: raw_performance
+    schema: energy_data
+    tables:
+      - name: energy_reports
+
 models:
   - name: stg_energy_market_france
     description: "Energy (MW) consumption and topology"
@@ -69,3 +74,36 @@ models:
       - elementary.volume_anomalies
       - elementary.freshness_anomalies
 
+models:
+  - name: stg_energy_reports
+    description: "Energy Performance Certificates"
+    columns:
+      - name: id
+        description: "Establishment number"
+        data_tests:
+          - unique
+          - not_null
+      - name: report_date
+        description: "Establishment date"
+        data_tests:
+          - not_null
+      - name: ges_label
+        description: "GES (https://promee.fr/renovation-energetique/quest-ce-que-la-classe-ges-comment-est-elle-calculee) Label"
+        data_tests:
+          - not_null
+      - name: dpe_label
+        description: "DPE (https://www.ecologie.gouv.fr/politiques-publiques/diagnostic-performance-energetique-dpe) Label"
+        data_tests:
+          - not_null
+      - name: building_year
+        description: "Year the building was constructed"
+      - name: postal_code
+        description: "Location postal code"
+        data_tests:
+          - not_null
+      - name: building_position
+        description: "Location within the building (RDC, top floor, in between)"
+      - name: contruction_period
+        description: "Period the building was constructed"
+        data_tests:
+          - not_null
