@@ -1,13 +1,7 @@
 version: 2
 
-sources:
-  - name: raw_energy
-    schema: energy_market_france
-    tables:
-      - name: raw_energy_market_france
-
 models:
-  - name: stg_energy_market_france
+  - name: int_energy_market_france
     description: "Energy (MW) consumption and topology"
     config:
       elementary:
@@ -20,14 +14,6 @@ models:
           - not_null
       - name: actual
         description: "The effective energy consumption for the period"
-        tests:
-          - elementary.column_anomalies:
-              column_anomalies:
-                - min
-                - max
-                - average
-                - standard_deviation
-                - variance
       - name: estimated_d1
         description: "Previous day estimated energy consumption for the period"
       - name: estimated_d
@@ -35,6 +21,8 @@ models:
 
       - name: co2_ratio
         description: "Energy (kWh) to CO2 (gram) ratio for the period"
+      - name: co2_impact
+        description: "The co2 (gram) impact for the period total energy consumption"
 
       - name: fuel_oil
         description: "Amount of Fuel based energy consumed for the period"
@@ -65,7 +53,17 @@ models:
         description: "Amount of energy imported from Switzerland (half hourly data, negative means export)"
       - name: import_germany_belgium
         description: "Amount of energy imported from Germany and Belgium (half hourly data, negative means export)"
-    tests:
-      - elementary.volume_anomalies
-      - elementary.freshness_anomalies
+
+      - name: renewable
+        description: "Amount of renewable based energy consumed for the period"
+      - name: non_renewable
+        description: "Amount of non renewable based energy consumed for the period"
+      - name: green
+        description: "Amount of green energy consumed for the period"
+      - name: non_green
+        description: "Amount of non green energy consumed for the period"
+      - name: clean
+        description: "Amount of clean energy consumed for the period"
+      - name: non_clean
+        description: "Amount of non clean energy consumed for the period"
 
