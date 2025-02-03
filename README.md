@@ -24,6 +24,7 @@ Feeds from [ecologie.data.gouv.fr](https://ecologie.data.gouv.fr/datasets/55f046
 - Add comparison with previous period
 - refactor FileAttachment time period switcher into a helper
 - CICD for Terraform and (Node) Lambda
+- CICD linting
 - improve charts:
   - clickable legend filtering
   - single tooltip regardles of series count
