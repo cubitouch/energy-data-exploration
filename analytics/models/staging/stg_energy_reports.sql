@@ -8,5 +8,5 @@ SELECT
     ann_e_construction AS building_year,
     code_postal_banx AS postal_code,
     position_logement_dans_immeuble AS building_position,
-    p_riode_construction AS construction_period
+    replace(replace(p_riode_construction, 'avant', 'before'), 'après', 'after') AS construction_period
 FROM {{ source('raw_performance', 'energy_reports') }}
