@@ -16,9 +16,8 @@ export const usePerMonth = (data: Report[]) => {
       x: {
         tickRotate: -45,
         label: "",
-        type: "band" as Plot.ScaleType,
         nice: true,
-        tickFormat: "%b %d",
+        tickFormat: "%B %Y",
       },
       y: {
         label: "Reports",
