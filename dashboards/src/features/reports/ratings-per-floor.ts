@@ -15,13 +15,15 @@ export const useRatingsPerFloor = (data: Summary[]) => {
     },
     {
       position: d.is_ground_floor ? "Ground floor" : "Other floors",
-      count: d.others_rating_group / (d.abc_rating_group + d.others_rating_group),
+      count:
+        d.others_rating_group / (d.abc_rating_group + d.others_rating_group),
       source: "Others",
     },
   ]);
 
   const options: Plot.PlotOptions = {
-    title: "How efficient are ground floor properties? (20th, 13th, 19th districts)",
+    title:
+      "How efficient are ground floor properties? (20th, 13th, 19th districts)",
     marginTop: 32,
     marginLeft: 48,
     x: {
