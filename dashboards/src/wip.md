@@ -130,7 +130,8 @@ const [plotPeriodRatingHeatmap, legendPeriodRatingHeatmap] =
 
 <div class="note">
 
-Properties built since 1983 have +20% C ratings, properties built between 2001 and 2021 offer an even higher amount C ratings ratio, and a growing amount of B ratings, properties built recently (since 2021) offer the best rating.
+Properties built since 2001 offer 75% or more C ratings and a growing amount of B ratings.
+Properties built between 1975 and 1977 may have been maintained (or built?) better, explaining a high C ratings amount within the older range. 
 
 Assumption #4 - confirmed ✅
 
