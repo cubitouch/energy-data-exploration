@@ -105,3 +105,48 @@ There seem to be proportionally more well rated properties on the ground floor t
 Assumption #3 - incorrect ❌
 
 </div>
+
+```js
+import { usePeriodRatingHeatmap } from "./features/reports/period-rating-heatmap.js";
+const ratingsPerFloor = await FileAttachment(
+  `data/reports/period-rating-heatmap.csv`
+).csv({
+  typed: true,
+});
+const [plotPeriodRatingHeatmap, legendPeriodRatingHeatmap] =
+  usePeriodRatingHeatmap(ratingsPerFloor);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex; flex-direction: column;">
+    <div style="flex:1;">
+      ${resize((width,height) => plotPeriodRatingHeatmap(width,height))}
+    </div>
+    <div style="flex: 0; justify-items: center;">
+      ${legendPeriodRatingHeatmap}
+    </div>
+  </div>
+</div>
+
+<div class="note">
+
+Properties built since 1983 have +20% C ratings, properties built between 2001 and 2021 offer an even higher amount C ratings ratio, and a growing amount of B ratings, properties built recently (since 2021) offer the best rating.
+
+Assumption #4 - confirmed ✅
+
+</div>
+
+-----
+
+## Conclusions
+
+1. ❌ Paris has few well rated properties,
+2. ✅ 75019, 75013 and 75018 are more efficient,
+3. ❌ Ground floor flats are actually more efficient,
+4. ✅ Recent constructions are usually more efficient.
+
+<div class="note">
+
+Further analysis: Can we represent a corelation of assumptions #2 and #4 via a construction era breakdown per postal codes? This would re-enforce assumption #2 findings, if 75019, 75013 and 75018 postal codes have higher amount of properties built since 1982 and/or since 2001, compared to other postal codes.
+
+</div>
