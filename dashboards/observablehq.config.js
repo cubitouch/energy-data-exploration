@@ -16,6 +16,7 @@ export default {
         { name: "Data Quality", path: "/data-quality" },
       ],
     },
+    { name: "Energy Performance Certificates", path: "/energy-performance-certificates" },
     { name: "About", path: "/about" },
   ],
 

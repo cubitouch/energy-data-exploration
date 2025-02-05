@@ -142,7 +142,7 @@ Assumption #4 - confirmed ✅
 ## Conclusions
 
 1. ❌ Paris has few well rated properties,
-2. ✅ 75019, 75013 and 75018 are more efficient,
+2. ✅ 75020, 75013 and 75019 are more efficient,
 3. ❌ Ground floor flats are actually more efficient,
 4. ✅ Recent constructions are usually more efficient.
 
