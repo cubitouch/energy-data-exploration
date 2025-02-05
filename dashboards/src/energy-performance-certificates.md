@@ -68,6 +68,23 @@ There is a low amount of properties rated A, B or C.
 Assumption #1 - incorrect ❌
 
 </div>
+
+```js
+import { useGeoPerPostalCode } from "./features/reports/geo-per-postal-code.js";
+const [plotGeoPerPostalCode, legendGeoPerPostalCode] =
+  useGeoPerPostalCode(ratingsPerPostalCode);
+```
+
+<div class="grid grid-cols-1" style="grid-auto-rows: 504px;">
+  <div class="card" style="display: flex; flex-direction: column;">
+    <div style="flex:1;">
+      ${resize((width,height) => plotGeoPerPostalCode(width,height))}
+    </div>
+    <div style="flex: 0; justify-items: center;">
+      ${legendGeoPerPostalCode}
+    </div>
+  </div>
+</div>
 <div class="note">
 
 At the time of writing 75020, 75013 and 75019 postal codes have a higher number of properties having been energy performance rated either A, B or C.
@@ -131,7 +148,7 @@ const [plotPeriodRatingHeatmap, legendPeriodRatingHeatmap] =
 <div class="note">
 
 Properties built since 2001 offer 75% or more C ratings and a growing amount of B ratings.
-Properties built between 1975 and 1977 may have been maintained (or built?) better, explaining a high C ratings amount within the older range. 
+Properties built between 1975 and 1977 may have been maintained (or built?) better, explaining a high C ratings amount within the older range.
 
 Assumption #4 - confirmed ✅
 
