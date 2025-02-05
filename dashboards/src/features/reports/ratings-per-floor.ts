@@ -22,8 +22,7 @@ export const useRatingsPerFloor = (data: Summary[]) => {
   ]);
 
   const options: Plot.PlotOptions = {
-    title:
-      "How efficient are ground floor properties? (20th, 13th, 19th districts)",
+    title: "How efficient are ground floor properties?",
     marginTop: 32,
     marginLeft: 48,
     x: {
