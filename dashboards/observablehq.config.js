@@ -27,6 +27,15 @@ export default {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Titillium+Web"
     />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HC6CP0M5H4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HC6CP0M5H4');
+    </script>
     <style>
 
     * {
