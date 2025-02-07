@@ -165,6 +165,6 @@ Assumption #4 - confirmed ✅
 
 <div class="note">
 
-Further analysis: Can we represent a corelation of assumptions #2 and #4 via a construction era breakdown per postal codes? This would re-enforce assumption #2 findings, if 75019, 75013 and 75018 postal codes have higher amount of properties built since 1982 and/or since 2001, compared to other postal codes.
+Further analysis: Can we represent a corelation of assumptions #2 and #4 via a construction era breakdown per postal codes? This would re-enforce assumption #2 findings, if 75020, 75013 and 75019 postal codes have higher amount of properties built since 1982 and/or since 2001, compared to other postal codes.
 
 </div>
