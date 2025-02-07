@@ -67,7 +67,7 @@ export const usePeriodRatingHeatmap = (data: Summary[]) => {
         Plot.text(fullData, {
           x: "dpe_label",
           y: "construction_period",
-          text: (d) => `${d3.format(".1%")(d.ratio)}`,
+          text: (d) => `${d3.format(".1f")(d.ratio * 100)}`,
           fill: (d) => getContrastColor(d.ratio),
         }),
       ],
