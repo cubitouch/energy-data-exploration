@@ -7,3 +7,6 @@ lambdas/node/dist
 lambdas/python/venv
 analytics/.dbt
 analytics/edr_target
+
+api/.env
+api/dist
