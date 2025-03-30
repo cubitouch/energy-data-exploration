@@ -117,9 +117,9 @@ const [plotRatingsPerFloor, legendRatingsPerFloor] =
 
 <div class="note">
 
-There seem to be proportionally more well rated properties on the ground floor than on other floors.
+There seem to be proportionally less well rated properties on the ground floor than on other floors.
 
-Assumption #3 - incorrect ❌
+Assumption #3 - confirmed ✅
 
 </div>
 
@@ -154,7 +154,7 @@ Assumption #4 - confirmed ✅
 
 </div>
 
------
+---
 
 ## Conclusions
 

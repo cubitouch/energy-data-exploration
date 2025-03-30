@@ -6,7 +6,7 @@ const QUERY = `
       construction_period,
       COUNT(*) as total
     FROM analytics_staging.stg_energy_reports
-    WHERE building_position = 'RDC'
+    WHERE floor_number = 0
     GROUP BY 1
   )
 
@@ -18,7 +18,7 @@ const QUERY = `
   FROM analytics_staging.stg_energy_reports r
   INNER JOIN total_per_period t
     ON t.construction_period = r.construction_period
-  WHERE building_position = 'RDC'
+  WHERE floor_number = 0
   GROUP BY 1,2,3
 `;
 
