@@ -10,3 +10,4 @@ SELECT
     numero_etage_appartement AS floor_number,
     replace(replace(periode_construction, 'avant', 'before'), 'après', 'after') AS construction_period
 FROM {{ source('raw_performance', 'energy_reports_2025') }}
+WHERE type_batiment = 'appartement' -- appartement, maison
