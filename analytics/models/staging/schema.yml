@@ -10,6 +10,7 @@ sources:
     schema: energy_data
     tables:
       - name: energy_reports
+      - name: energy_reports_2025
 
 models:
   - name: stg_energy_market_france
@@ -101,8 +102,8 @@ models:
         description: "Location postal code"
         data_tests:
           - not_null
-      - name: building_position
-        description: "Location within the building (RDC, top floor, in between)"
+      - name: floor_number
+        description: "Floor number"
       - name: construction_period
         description: "Period the building was constructed"
         data_tests:
