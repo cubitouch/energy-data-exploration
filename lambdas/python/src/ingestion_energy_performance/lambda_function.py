@@ -34,7 +34,7 @@ def energy_reports_source():
                     "params": {
                         "size": 10_000,
                         "sort": "date_reception_dpe",
-                        "select": "numero_dpe,date_etablissement_dpe,etiquette_ges,etiquette_dpe,annee_construction,type_installation_ecs,periode_construction,surface_habitable_logement,classe_inertie_batiment,numero_etage_appartement,nom_commune_ban,code_region_ban,code_postal_ban",
+                        "select": "numero_dpe,date_etablissement_dpe,etiquette_ges,etiquette_dpe,annee_construction,type_installation_ecs,periode_construction,surface_habitable_logement,classe_inertie_batiment,numero_etage_appartement,nom_commune_ban,code_region_ban,code_postal_ban,type_batiment",
                     },
                 },
             },
